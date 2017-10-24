@@ -6,7 +6,8 @@
     "scripts": {
         "test": "node ./test.js",
         "start": "node ./src/index.js",
-        "debug": "node --inspect-brk ./src/index.js"
+        "debug": "node --inspect-brk ./src/index.js",
+        "jsdoc": "jsdoc --configure ./config/jsdoc.config.json"
     },
     "author": "",
     "license": "ISC",
