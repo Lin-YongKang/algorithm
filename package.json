@@ -1,34 +1,35 @@
 {
-  "name": "express-mysql-sequelize",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "body-parser": "^1.18.2",
-    "connect-timeout": "^1.9.0",
-    "ejs": "^2.5.7",
-    "errorhandler": "^1.5.0",
-    "express": "^4.16.2",
-    "morgan": "^1.9.0",
-    "mysql2": "^1.4.2",
-    "sequelize": "^4.15.0",
-    "serve-favicon": "^2.4.5",
-    "sexy-require": "^0.1.0"
-  },
-  "path": {
-    "$root": "/",
-    "$src": "/src",
-    "$router": "/src/router",
-    "$action": "/src/action",
-    "$static": "/src/static",
-    "$controller": "/src/controller",
-    "$model": "/src/model",
-    "$sequelize": "/src/model/sequelize.js"
-  }
+    "name": "express-mysql-sequelize",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "node ./test.js",
+        "start": "node ./src/index.js",
+        "debug": "node --inspect-brk ./src/index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "body-parser": "^1.18.2",
+        "connect-timeout": "^1.9.0",
+        "ejs": "^2.5.7",
+        "errorhandler": "^1.5.0",
+        "express": "^4.16.2",
+        "morgan": "^1.9.0",
+        "mysql2": "^1.4.2",
+        "sequelize": "^4.15.0",
+        "serve-favicon": "^2.4.5",
+        "sexy-require": "^0.1.0"
+    },
+    "path": {
+        "$root": "/",
+        "$src": "/src",
+        "$router": "/src/router",
+        "$action": "/src/action",
+        "$static": "/src/static",
+        "$controller": "/src/controller",
+        "$model": "/src/model",
+        "$sequelize": "/src/model/sequelize.js"
+    }
 }
