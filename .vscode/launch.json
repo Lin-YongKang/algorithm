@@ -10,6 +10,8 @@
             "request": "launch",
             "cwd": "${workspaceRoot}",
             "runtimeExecutable": "npm",
+            "sourceMaps": true,
+            "outFiles": ["/dist"],
             "runtimeArgs": ["run", "debug"],
             "port": 9229
         }
