@@ -1,4 +1,4 @@
-const model = require("$model");
+//import model = require("$model/index");
 
 /**
  * Action demo.
@@ -11,10 +11,14 @@ const model = require("$model");
  * @param {Object} body post查询参数.
  * @return {Promise}
  */
-exports.assign = (query, body) => {
+let assign = (query, body) => {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(Object.assign({}, query, body));
         }, 1000);
     });
+};
+
+export = {
+    assign
 };

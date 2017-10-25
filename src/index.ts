@@ -1,25 +1,28 @@
 require("sexy-require");
 require("$sequelize");
-const express = require("express");
-const app = express();
-const router = require("$router");
-const bodyParser = require("body-parser");
-const errorhandler = require("errorhandler");
-const morgan = require("morgan");
-const favicon = require("serve-favicon");
-const path = require("path");
-const timeout = require("connect-timeout");
 
-app.set("views", path.join(__dirname, "static"));
+import express = require("express");
+import router = require("$router");
+import bodyParser = require("body-parser");
+import errorhandler = require("errorhandler");
+import morgan = require("morgan");
+import favicon = require("serve-favicon");
+import path = require("path");
+import timeout = require("connect-timeout");
+
+const app = express();
+const STATIC = path.join(__dirname, "../static");
+
+app.set("views", STATIC);
 app.engine(".html", require("ejs").__express);
 app.set("view engine", "html");
 
 app.use(timeout("30s"));
 app.use(morgan("combined"));
-app.use(favicon(path.join(__dirname, "static/image", "favicon.ico")));
+app.use(favicon(path.join(STATIC, "./image/favicon.ico")));
+app.use("/static", express.static(STATIC));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/static", express.static("src/static"));
 app.use("/", router);
 app.use(errorhandler());
 

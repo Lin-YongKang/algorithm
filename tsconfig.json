@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "target": "ES2017",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "alwaysStrict": true,
+        "experimentalDecorators": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "sourceMap": false,
+        "sourceRoot": "src",
+        "removeComments": true,
+        "outDir": "dist",
+        "lib": ["dom", "es2015", "es2016", "es2017", "es5", "es6", "es7"],
+        "noEmitOnError": true,
+        "noUnusedLocals": true,
+        "pretty": true,
+        "strictNullChecks": true,
+        "traceResolution": true,
+        "baseUrl": "src",
+        "paths": {
+            "$root": ["../index"],
+            "$root/*": ["../*"],
+            "$src": ["index"],
+            "$src/*": ["*"],
+            "$sequelize": ["model/sequelize"],
+            "$static/*": ["../static/*"],
+            "$*": ["*"]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}

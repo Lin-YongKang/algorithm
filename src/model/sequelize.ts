@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+import Sequelize = require("sequelize");
 
 const sequelize = new Sequelize("ntntn", "km", "842557119", {
     host: "localhost",
@@ -20,4 +20,4 @@ sequelize
     .catch(err => {
         console.error("Unable to connect to the database:", err);
     });
-module.exports = sequelize;
+export = sequelize;
