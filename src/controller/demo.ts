@@ -1,6 +1,7 @@
 import action = require("$action/index");
+import types = require("$controller/types");
 
-let api = {
+const api: types.API = {
     async params(req, res) {
         let { query, body } = req;
         let result = await action.demo.assign(query, body);
@@ -8,11 +9,11 @@ let api = {
     }
 };
 
-let view = async (req, res) => {
+const view: types.RequestHandler = async (req, res) => {
     res.render("demo", { title: "demo view" });
 };
 
-let error = (req, res) => {
+const error: types.RequestHandler = (req, res) => {
     throw new Error("error");
 };
 

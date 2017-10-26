@@ -11,7 +11,7 @@
  * @param {Object} body post查询参数.
  * @return {Promise}
  */
-let assign = (query, body) => {
+let assign = (query: Object, body: Object): Promise<Object> => {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(Object.assign({}, query, body));
