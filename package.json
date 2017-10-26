@@ -1,5 +1,5 @@
 {
-    "name": "express-mysql-sequelize",
+    "name": "typescript-express-mysql-sequelize",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
