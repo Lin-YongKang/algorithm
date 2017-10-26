@@ -15,7 +15,7 @@ let assign = (query, body) => {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(Object.assign({}, query, body));
-        }, 1000);
+        }, 3000);
     });
 };
 

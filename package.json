@@ -4,11 +4,11 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "node ./test.js",
         "start": "node ./dist/index.js",
-        "debug": "tsc --project ./config/ts.config.json & node --inspect-brk ./dist/index.js",
+        "debug": "node --inspect-brk ./dist/index.js",
         "jsdoc": "jsdoc --configure ./config/jsdoc.config.json",
-        "tsc": "tsc --project ./config/ts.config.json"
+        "tscw": "tsc --watch",
+        "tsc": "tsc"
     },
     "author": "",
     "license": "ISC",
