@@ -6,34 +6,17 @@
     "scripts": {
         "start": "node ./dist/index.js",
         "debug": "node --inspect-brk ./dist/index.js",
-        "jsdoc": "jsdoc --configure ./config/jsdoc.config.json",
         "tscw": "tsc --watch",
         "tsc": "tsc"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@types/express": "^4.0.38",
         "@types/node": "^8.0.47",
-        "body-parser": "^1.18.2",
-        "connect-timeout": "^1.9.0",
-        "ejs": "^2.5.7",
-        "errorhandler": "^1.5.0",
-        "express": "^4.16.2",
-        "morgan": "^1.9.0",
-        "mysql2": "^1.4.2",
-        "sequelize": "^4.15.0",
-        "serve-favicon": "^2.4.5",
         "sexy-require": "^0.1.0"
     },
     "path": {
         "$root": "/",
-        "$src": "/dist",
-        "$static": "/static",
-        "$router": "/dist/router",
-        "$action": "/dist/action",
-        "$controller": "/dist/controller",
-        "$model": "/dist/model",
-        "$sequelize": "/dist/model/sequelize.js"
+        "$src": "/dist"
     }
 }
