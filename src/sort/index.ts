@@ -8,4 +8,5 @@ export namespace Types {
 import Insertion from "./Insertion";
 import Selection from "./Selection";
 import Shell from "./Shell";
-export { Insertion, Selection, Shell };
+import Merge from "./Merge";
+export { Insertion, Selection, Shell, Merge };

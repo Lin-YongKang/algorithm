@@ -19,8 +19,8 @@ export default abstract class Example {
     }
     public static test(list: any[]) {
         let sortedList = this.sort(list);
-        assert.ok(this.isSorted(sortedList));
         this.show(sortedList);
+        assert.ok(this.isSorted(sortedList));
     }
     protected static larg(v: Comparable, w: typeof v): boolean;
     protected static larg(v: number, w: typeof v): boolean;
