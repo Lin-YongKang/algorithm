@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import Comparable from "../utils/Comparable";
-=======
-import Comparable from '../utils/Comparable';
->>>>>>> 0efd3b2b0e46abcfcf6a3ddc9396accb5fe44e26
 import * as assert from "assert";
 
 export type Param = Comparable[] | number[];

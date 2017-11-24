@@ -1,26 +1,36 @@
 import Example, { Types } from "./index";
+/**
+ * @description
+ * 自顶到下的归并排序
+ * 自上而下，在合并前才会对子数组进行排序
+ */
 export default class Merge extends Example {
-    public static sortSelf(list: Types.Param): void {
-        this.fen(list);
-    }
-    private static fen(list: Types.Param) {
-        let len = list.length;
-        if (len === 1) return list;
-        return this.merge(this.fen(list.slice(0, Math.floor(len / 2))), this.fen(list.slice(Math.floor(len / 2), len)));
-    }
-    private static merge(lList: Types.Param, rList: Types.Param) {
-        let lLen = lList.length;
-        let rLen = rList.length;
-        let len = lLen + rLen;
-        let l = 0;
-        let r = 0;
-        let list: Types.Param = [];
-        for (let k = 0; k < len; k++) {
-            if (l >= lLen) list[k] = lList[l++];
-            else if (r >= rLen) list[k] = lList[r++];
-            else if (this.less(<any>lList[l], <any>rList[r])) list[k] = lList[l++];
-            else list[k] = rList[r++];
+    private static aux: Types.Param;
+    public static sortSelf(list: Types.Param, lo: number, hi: number): void;
+    public static sortSelf(list: Types.Param): void;
+    public static sortSelf(list, lo?, hi?) {
+        if (typeof lo === 'number') {
+            if (hi <= lo) return;
+            let mid = lo + parseInt(String((hi - lo) / 2));
+            this.sortSelf(list, lo, mid);
+            this.sortSelf(list, mid + 1, hi);
+            this.merge(list, lo, mid, hi);
+        } else if (lo === undefined) {
+            this.aux = []
+            this.sortSelf(list, 0, list.length - 1);
         }
-        return list;
+    }
+    private static merge(list: Types.Param, lo: number, mid: number, hi: number) {
+        let i = lo,
+            j = mid + 1;
+        for (let k = lo; k <= hi; k++) {
+            this.aux[k] = list[k];
+        }
+        for (let k = lo; k <= hi; k++) {
+            if (i > mid) list[k] = this.aux[j++];
+            else if (j > hi) list[k] = this.aux[i++];
+            else if (this.less(<any>this.aux[j], <any>this.aux[i])) list[k] = this.aux[j++];
+            else list[k] = this.aux[i++];
+        }
     }
 }
