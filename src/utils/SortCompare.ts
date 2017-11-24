@@ -35,11 +35,11 @@ export default class SortCompare {
         }
         return total;
     }
-    public static test() {
+    public static test(...names) {
         let nList = this.randomInput(0, 100000, 10000, 10);
-        let t1 = this.sort(sort.Insertion.name, nList);
-        let t2 = this.sort(sort.Selection.name, nList);
-        console.log(sort.Insertion.name, t1);
-        console.log(sort.Selection.name, t2);
+        let ts = names.map(name => this.sort(name, nList));
+        ts.forEach((t, index) => {
+            console.log(names[index], t);
+        });
     }
 }
