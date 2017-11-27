@@ -35,7 +35,7 @@ export default class SortCompare {
         }
         return total;
     }
-    public static test(...names) {
+    public static test(...names: string[]) {
         let nList = this.randomInput(0, 100000, 20000, 30);
         let ts = names.map(name => this.sort(name, nList));
         ts.forEach((t, index) => {

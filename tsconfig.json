@@ -17,8 +17,9 @@
         "noEmitOnError": true,
         "noUnusedLocals": true,
         "pretty": true,
-        "strictNullChecks": true,
+        "strictNullChecks": false,
         "traceResolution": true,
+        "strict":true,
         "baseUrl": "src",
         "paths": {
             "$root": ["../index"],

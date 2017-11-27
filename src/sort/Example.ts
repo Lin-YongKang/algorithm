@@ -1,4 +1,4 @@
-import Comparable from "../utils/Comparable";
+import { Comparable } from "../interface";
 import * as assert from "assert";
 
 export type Param = Comparable[] | number[];
@@ -24,24 +24,26 @@ export default abstract class Example {
     }
     protected static larg(v: Comparable, w: typeof v): boolean;
     protected static larg(v: number, w: typeof v): boolean;
-    protected static larg(v, w) {
+    protected static larg(v: any, w: any) {
         return this.compareWith(v, w) === 1;
     }
     protected static less(v: Comparable, w: typeof v): boolean;
     protected static less(v: number, w: typeof v): boolean;
-    protected static less(v, w) {
+    protected static less(v: any, w: any) {
         return this.compareWith(v, w) === -1;
     }
     protected static equal(v: Comparable, w: typeof v): boolean;
     protected static equal(v: number, w: typeof v): boolean;
-    protected static equal(v, w) {
+    protected static equal(v: any, w: any) {
         return this.compareWith(v, w) === 0;
     }
-    protected static compareWith(v: Comparable | number, w: typeof v) {
+    private static compareWith(v: Comparable | number, w: typeof v) {
         if (typeof v === "number") {
+            w = <typeof v>w;
             return v < w ? -1 : v === w ? 0 : 1;
         } else {
-            return v.compareTo(<Comparable>w);
+            w = <typeof v>w;
+            return v.compareTo(w);
         }
     }
     protected static exch(list: Param, i: number, j: number) {
