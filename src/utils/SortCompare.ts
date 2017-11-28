@@ -1,3 +1,4 @@
+import StdRandom from "./StdRandom";
 import * as sort from "../sort";
 import Stopwatch from "./Stopwatch";
 export default class SortCompare {
@@ -13,13 +14,10 @@ export default class SortCompare {
         for (let i = 0; i < t; i++) {
             nList[i] = [];
             for (let j = 0; j < n; j++) {
-                nList[i][j] = _random(min, max);
+                nList[i][j] = StdRandom.uniformInt(min, max);
             }
         }
         return nList;
-        function _random(min: number, max: number) {
-            return Math.floor(min + Math.random() * max);
-        }
     }
     public static sort(Sort: typeof sort.Example, nList: number[][]) {
         let timer = new Stopwatch();
