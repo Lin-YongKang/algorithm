@@ -1,3 +1,3 @@
 import * as utils from "./index";
-
-utils.StdRandom.test();
+import { Sequential ,Binary} from "../select";
+utils.FrequencyCounter.test( Sequential ,Binary);

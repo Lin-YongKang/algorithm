@@ -17,7 +17,7 @@ const MAP: Indexable = {
 }
 const LIST = ['A', 'C', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'X'];
 export abstract class DisorderedTableExample<K, V> extends Comparer {
-    protected static general() {
+    public static general() {
         interface That extends DisorderedTableExample<any, any> { }
         let That = <any>this;
         let target: That = new That();
