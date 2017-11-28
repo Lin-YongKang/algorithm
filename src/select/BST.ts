@@ -1,11 +1,11 @@
 import ST from "./ST";
-import Comparable from '../utils/Comparable';
-class Node<K, V>{
+import Comparable from "../interface/Comparable";
+class Node<K, V> {
     public key: K;
     public value: V;
     public left: this;
     public right: this;
-    get count() {
+    get count(): number {
         return this.left.count + this.right.count;
     }
     constructor(key: K, value: V) {
@@ -13,11 +13,11 @@ class Node<K, V>{
         this.value = value;
     }
 }
-export default class BST<K extends Comparable, V> extends ST<K, V>{
+export default class BST<K extends Comparable, V> extends ST<K, V> {
     private root: Node<K, V>;
     public size(): number;
     public size(node: Node<K, V>): number;
-    public size(node?) {
+    public size(node?: Node<K, V>) {
         if (node === undefined) {
             return this.size(this.root);
         } else {
@@ -26,8 +26,8 @@ export default class BST<K extends Comparable, V> extends ST<K, V>{
     }
     public get(key: K): V;
     public get(node: Node<K, V>, key: K): V;
-    public get(node, key?) {
-        if (key === undefined) key = node;
+    public get(node: Node<K, V> | K, key?: K) {
+        if (key === undefined) key = <K>node;
         if (node === null) return null;
         if (node instanceof Node) {
             let cmp = (<K>key).compareTo(node.key);
@@ -38,31 +38,28 @@ export default class BST<K extends Comparable, V> extends ST<K, V>{
             this.get(this.root, key);
         }
     }
-    public put(key: K, value: V): void;
-    public put(node: Node<K, V>, key: K, value: V): void;
-    public put(node, key, value?) {
+    public put(key: K, value: V): Node<K, V>;
+    public put(node: Node<K, V>, key: K, value: V): Node<K, V>;
+    public put(node: Node<K, V> | K, key: K | V, value?: V) {
         if (value === undefined) {
-            value = key;
-            key = node;
+            value = <V>key;
+            key = <K>node;
         }
+
         if (node === null) return new Node(key, value);
+        node = <Node<K, V>>node;
         let cmp = (<Comparable>key).compareTo(node.key);
-        if (cmp < 0) node.left = this.put(node.left, key, value);
-        else if (cmp > 0) node.right = this.put(node.right, key, value);
+        if (cmp < 0) node.left = this.put(node.left, <K>key, value);
+        else if (cmp > 0) node.right = this.put(node.right, <K>key, value);
         else node.value = value;
         return node;
     }
     public keys(): Iterable<K>;
     public keys(lo: K, hi: K): Iterable<K>;
     public keys(node: Node<K, V>, quene: Array<K>, lo: K, hi: K): Iterable<K>;
-    public keys(node?, quene?, lo?, hi?) {
+    public keys(node?: Node<K, V> | K | undefined, quene?: Array<K> | K | undefined, lo?: K, hi?: K) {
         if (node === undefined) {
-            return this.keys()
-        } else if (lo === undefined) {
-            lo = node;
-            hi = quene;
-        } else {
-
+            return this.keys();
         }
         return [];
     }

@@ -3,7 +3,7 @@ import Stopwatch from "./Stopwatch";
 export default class SortCompare {
     public static time(name: string, list: sort.Types.Param) {
         let timer = new Stopwatch();
-        sort[name].sort(list);
+        //sort[name].sort(list);
         return timer.elapsedTime();
     }
     /**

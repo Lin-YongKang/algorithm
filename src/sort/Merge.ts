@@ -8,15 +8,15 @@ export default class Merge extends Example {
     private static aux: Types.Param;
     public static sortSelf(list: Types.Param, lo: number, hi: number): void;
     public static sortSelf(list: Types.Param): void;
-    public static sortSelf(list, lo?, hi?) {
-        if (typeof lo === 'number') {
+    public static sortSelf(list: Types.Param, lo?: number, hi?: number) {
+        if (typeof lo === "number") {
             if (hi <= lo) return;
             let mid = lo + parseInt(String((hi - lo) / 2));
             this.sortSelf(list, lo, mid);
             this.sortSelf(list, mid + 1, hi);
             this.merge(list, lo, mid, hi);
         } else if (lo === undefined) {
-            this.aux = []
+            this.aux = [];
             this.sortSelf(list, 0, list.length - 1);
         }
     }

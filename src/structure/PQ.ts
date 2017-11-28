@@ -1,11 +1,11 @@
-import Comparable from "../utils/Comparable";
+import Comparable from "../interface/Comparable";
 
-export default abstract class PQ<T extends Comparable<T>>{
+export default abstract class PQ<T extends Comparable> {
     protected pq: T[];
     protected N: number = 0;
-    constructor(list: T);
+    constructor(list: T[]);
     constructor();
-    constructor(list?) {
+    constructor(list?: T[]) {
         this.pq = [];
         if (list !== undefined) {
             list.forEach(element => {
@@ -36,7 +36,7 @@ export default abstract class PQ<T extends Comparable<T>>{
         return this.N;
     }
     protected less(i: number, j: number): boolean {
-        if (typeof this.pq[i] === 'number') {
+        if (typeof this.pq[i] === "number") {
             return this.pq[i] < this.pq[j];
         } else {
             return this.pq[i].compareTo(this.pq[j]) < 0;
@@ -47,5 +47,4 @@ export default abstract class PQ<T extends Comparable<T>>{
         this.pq[i] = this.pq[j];
         this.pq[j] = temp;
     }
-    
 }

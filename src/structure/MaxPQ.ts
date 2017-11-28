@@ -1,7 +1,7 @@
-import Comparable from "../utils/Comparable";
+import Comparable from "../interface/Comparable";
 import PQ from "./PQ";
-export default class MaxPQ<T extends Comparable<T>> extends PQ<T>{
-    constructor(list?) {
+export default class MaxPQ<T extends Comparable> extends PQ<T> {
+    constructor(list?: T[]) {
         super(list);
     }
     protected sink(k: number): void {
@@ -19,10 +19,10 @@ export default class MaxPQ<T extends Comparable<T>> extends PQ<T>{
             k = Math.floor(k / 2);
         }
     }
-    public static test(list) {
+    public static test(list: any[]) {
         console.log(list);
         let maxPQ = new MaxPQ(list);
-        while(!maxPQ.isEmpty()){
+        while (!maxPQ.isEmpty()) {
             console.log(maxPQ.delTop());
         }
     }
