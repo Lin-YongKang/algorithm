@@ -1,14 +1,36 @@
-import * as readline from "readline";
-import * as fs from "fs";
 import Comparer from "../interface/Comparer";
-import { Comparable } from "interface";
+import { Comparable, Indexable } from "interface";
+import * as assert from 'assert';
+
+const STRING = "SEARCHEXAMPLE";
+const MAP: Indexable = {
+    A: 8,
+    C: 4,
+    E: 12,
+    H: 5,
+    L: 11,
+    M: 9,
+    P: 10,
+    R: 3,
+    S: 0,
+    X: 7
+}
+const LIST = ['A', 'C', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'X'];
 export abstract class DisorderedTableExample<K, V> extends Comparer {
-    public static test() {
-        interface That extends DisorderedTableExample<any, any> {}
+    protected static general() {
+        interface That extends DisorderedTableExample<any, any> { }
         let That = <any>this;
         let target: That = new That();
-        let rl = readline.createInterface(fs.createReadStream("../../data/leipzig300k.txt"));
-        rl.on("line", line => {});
+        for (let i = 0, len = STRING.length; i < len; i++) {
+            target.put(STRING.charAt(i), i);
+        }
+        return target;
+    }
+    public static test() {
+        let target = this.general();
+        for (let key of target.keys()) {
+            assert.equal(target.get(key), MAP[key]);
+        }
     }
     abstract put(key: K, value: V): void;
     abstract get(key: K): V;
@@ -26,15 +48,50 @@ export abstract class DisorderedTableExample<K, V> extends Comparer {
 }
 
 export abstract class OrderedTableExample<K extends Comparable, V> extends DisorderedTableExample<K, V> {
+    public static test() {
+        let target = this.general();
+        for (let key of target.keys()) {
+            assert.equal(key, LIST.shift());
+            assert.equal(target.get(key), MAP[key]);
+        }
+    }
+    /**
+     * 最小的key
+     */
     abstract min(): K;
+    /**
+     * 最大的key
+     */
     abstract max(): K;
-    abstract floor(): K;
-    abstract ceil(): K;
+    /**
+     * 小于等于{@code key}的最大值
+     * @param key 
+     */
+    abstract floor(key: K): K;
+    /**
+     * 大于等于{@code key}的最小值
+     * @param key 
+     */
+    abstract ceil(key: K): K;
+    /**
+     * 小于{@code key}的数量
+     * @param key 
+     * 
+     */
     abstract rank(key: K): number;
+    /**
+     * 排名为{@code k}的key
+     */
     abstract select(k: number): K;
+    /**
+     * 删除最小的键
+     */
     public deleteMin(): void {
         this.delete(this.min());
     }
+    /**
+     * 删除最大的键
+     */
     public deleteMax(): void {
         this.delete(this.max());
     }
@@ -49,10 +106,11 @@ export abstract class OrderedTableExample<K extends Comparable, V> extends Disor
             } else {
                 return this.rank(hi) - this.rank(lo);
             }
-        } else if (lo === undefined) {
-            return this.size(this.min(), this.max());
         }
     }
-    abstract keys(): Iterable<K>;
-    abstract keys(lo: K, hi: K): Iterable<K>;
+    public keys(): Iterable<K>;
+    public keys(lo: K, hi: K): Iterable<K>;
+    public keys(lo?: K, hi?: K): Iterable<K> {
+        if (lo === undefined) return this.keys(this.min(), this.max());
+    }
 }
