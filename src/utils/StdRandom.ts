@@ -42,6 +42,16 @@ class StdRandom {
     public static uniform(): number {
         return Math.random();
     }
+    public static uniforFloatList(min: number, max: number, n: number): number[] {
+        let list = [];
+        while (n--) list.push(this.uniformFloat(min, max));
+        return list;
+    }
+    public static uniformIntList(min: number, max: number, n: number): number[] {
+        let list = [];
+        while (n--) list.push(this.uniformInt(min, max));
+        return list;
+    }
     /**
      * [0,n)之间的实数
      * @param n number of possible float;

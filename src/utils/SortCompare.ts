@@ -11,12 +11,7 @@ export default class SortCompare {
      */
     public static randomInput(min: number, max: number, n: number, t: number) {
         let nList: number[][] = [];
-        for (let i = 0; i < t; i++) {
-            nList[i] = [];
-            for (let j = 0; j < n; j++) {
-                nList[i][j] = StdRandom.uniformInt(min, max);
-            }
-        }
+        while (t--) nList[t] = StdRandom.uniformIntList(min, max, n);
         return nList;
     }
     public static sort(Sort: typeof sort.Example, nList: number[][]) {
