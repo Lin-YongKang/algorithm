@@ -15,6 +15,13 @@ export default class Stopwatch {
     }
     public static test() {
         let stopwatch = new Stopwatch();
-        setTimeout(stopwatch.elapsedTime, 1000);
+        console.log(stopwatch.elapsedTime());
+        setTimeout(() => {
+            console.log(stopwatch.intervalTime());
+            setTimeout(() => {
+                console.log(stopwatch.elapsedTime());
+                console.log(stopwatch.intervalTime());
+            }, 2000);
+        }, 1000);
     }
 }

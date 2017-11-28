@@ -1,3 +1,3 @@
 import * as utils from "./index";
 
-utils.Stopwatch.test();
+utils.StdRandom.test();

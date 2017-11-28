@@ -1,4 +1,4 @@
-import Comparable from "../interface/Comparable";
+import { Comparable } from "../interface";
 import PQ from "./PQ";
 
 export default class MinPQ<T extends Comparable> extends PQ<T> {

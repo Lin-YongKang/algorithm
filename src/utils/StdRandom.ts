@@ -1,4 +1,40 @@
-export default class StdRandom {
+import * as assert from "assert";
+const log = console.log;
+/**
+ * 判断{@code number}在[lo,hi)之间；
+ * @param number 要判断的数
+ * @param lo 大于等于lo
+ * @param hi 小于hi
+ */
+function isInRange(number: number, lo: number, hi: number): boolean {
+    try {
+        let bol = number >= lo && number < hi;
+        assert.ok(bol);
+        return bol;
+    } catch (e) {
+        log(e);
+        log(number, lo, hi);
+    }
+}
+function about<T = boolean>(list: T[], sign: T, min: number, max: number): boolean {
+    let probability = list.filter(item => item === sign).length / list.length;
+    return isInRange(probability, min, max);
+}
+function loop(callback: () => void, count: number = 10): any[] {
+    let list = [];
+    for (let i = 0; i < count; i++) list.push(callback());
+    return list;
+}
+class StdRandom {
+    public static test() {
+        loop(() => isInRange(this.uniform(), 0, 1));
+        loop(() => isInRange(this.uniformFloat(10), 0, 10));
+        loop(() => isInRange(this.uniformFloat(3, 10), 3, 13));
+        loop(() => isInRange(this.uniformInt(10), 0, 10));
+        loop(() => isInRange(this.uniformInt(3, 10), 3, 13));
+        loop(() => about(loop(() => this.bernoulli(), 1000), true, 0.45, 0.55));
+        loop(() => about(loop(() => this.bernoulli(0.2), 1000), true, 0.15, 0.25));
+    }
     /**
      * [0,1)之间的实数
      * @return a random real number uniformly in [0, 1)
@@ -7,7 +43,7 @@ export default class StdRandom {
         return Math.random();
     }
     /**
-     * [0,n-1)之间的实数
+     * [0,n)之间的实数
      * @param n number of possible float;
      * @return a random number uniformly between 0 (inclusive) and {@code n} (exclusive)
      */
@@ -27,7 +63,7 @@ export default class StdRandom {
         return lo + this.uniform() * hi;
     }
     /**
-     * [0,n-1)之间的整数
+     * [0,n)之间的整数
      * @param n number of possible int;
      * @return a random number uniformly between 0 (inclusive) and {@code n} (exclusive)
      */
@@ -44,7 +80,7 @@ export default class StdRandom {
             hi = lo;
             lo = 0;
         }
-        return Math.ceil(lo + this.uniform() * hi);
+        return Math.floor(lo + this.uniform() * hi);
     }
     /**
      * 返回{@code true}的概率为50%;
@@ -129,7 +165,7 @@ export default class StdRandom {
     public static shuffleSelf(list: any[]): void {
         let len = list.length;
         for (let i = 0; i < len; i++) {
-            let r = i + this.uniformInt(len - i);     // between i and n-1
+            let r = i + this.uniformInt(len - i); // between i and n-1
             let temp = list[i];
             list[i] = list[r];
             list[r] = temp;
@@ -147,3 +183,5 @@ export default class StdRandom {
         return l;
     }
 }
+
+export default StdRandom;

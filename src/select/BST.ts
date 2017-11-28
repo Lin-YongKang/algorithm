@@ -1,5 +1,5 @@
 import ST from "./ST";
-import Comparable from "../interface/Comparable";
+import { Comparable } from "../interface";
 class Node<K, V> {
     public key: K;
     public value: V;

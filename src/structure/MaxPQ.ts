@@ -1,4 +1,4 @@
-import Comparable from "../interface/Comparable";
+import { Comparable } from "../interface";
 import PQ from "./PQ";
 export default class MaxPQ<T extends Comparable> extends PQ<T> {
     constructor(list?: T[]) {

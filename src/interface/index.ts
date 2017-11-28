@@ -1,3 +1,8 @@
-import Comparable from "./Comparable";
+interface Indexable {
+    [key: string]: any;
+}
 
-export { Comparable }
+interface Comparable {
+    compareTo(that: this): number;
+}
+export { Comparable, Indexable };

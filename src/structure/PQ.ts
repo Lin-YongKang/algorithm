@@ -1,4 +1,4 @@
-import Comparable from "../interface/Comparable";
+import { Comparable } from "../interface";
 
 export default abstract class PQ<T extends Comparable> {
     protected pq: T[];
