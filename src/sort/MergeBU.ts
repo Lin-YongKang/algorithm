@@ -1,13 +1,14 @@
-import Example, { Types } from "./index";
+import { Comparables } from "../interface";
+import Example from "./index";
 /**
  * @description
  * 自底向上的归并排序
  * 对全部最小分解的数组进行排序，然后两两归并
  */
 export default class MergeBU extends Example {
-    private static aux: Types.Param;
+    private static aux: Comparables;
 
-    public static sortSelf(list: Types.Param): void {
+    public static sortSelf(list: Comparables): void {
         let len = list.length;
         this.aux = [];
         for (let sz = 1; sz < len; sz = sz + sz) {
@@ -16,7 +17,7 @@ export default class MergeBU extends Example {
             }
         }
     }
-    private static merge(list: Types.Param, lo: number, mid: number, hi: number) {
+    private static merge(list: Comparables, lo: number, mid: number, hi: number) {
         let i = lo,
             j = mid + 1;
         for (let k = lo; k <= hi; k++) {
@@ -25,7 +26,7 @@ export default class MergeBU extends Example {
         for (let k = lo; k <= hi; k++) {
             if (i > mid) list[k] = this.aux[j++];
             else if (j > hi) list[k] = this.aux[i++];
-            else if (this.less(<any>this.aux[j], <any>this.aux[i])) list[k] = this.aux[j++];
+            else if (this.less(this.aux[j], this.aux[i])) list[k] = this.aux[j++];
             else list[k] = this.aux[i++];
         }
     }

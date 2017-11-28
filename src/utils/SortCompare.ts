@@ -1,11 +1,6 @@
 import * as sort from "../sort";
 import Stopwatch from "./Stopwatch";
 export default class SortCompare {
-    public static time(name: string, list: sort.Types.Param) {
-        let timer = new Stopwatch();
-        //sort[name].sort(list);
-        return timer.elapsedTime();
-    }
     /**
      *
      * @param min 随机数的最小值
@@ -26,20 +21,17 @@ export default class SortCompare {
             return Math.floor(min + Math.random() * max);
         }
     }
-    public static sort(name: string, nList: number[][]) {
-        let total = 0;
+    public static sort(Sort: typeof sort.Example, nList: number[][]) {
+        let timer = new Stopwatch();
         for (let i = 0, len = nList.length; i < len; i++) {
-            let t = this.time(name, nList[i]);
-            console.log(name, t);
-            total += t;
+            Sort.sort(nList[i]);
+            console.log(Sort.name, timer.intervalTime());
         }
-        return total;
+        return timer.elapsedTime();
     }
-    public static test(...names: string[]) {
+    public static test(...Sorts: typeof sort.Example[]) {
         let nList = this.randomInput(0, 100000, 20000, 30);
-        let ts = names.map(name => this.sort(name, nList));
-        ts.forEach((t, index) => {
-            console.log(names[index], t);
-        });
+        let ts = Sorts.map(Sort => this.sort(Sort, nList));
+        ts.forEach((t, index) => console.log(Sorts[index].name, t));
     }
 }
