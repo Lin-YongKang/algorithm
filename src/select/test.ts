@@ -1,6 +1,7 @@
 import * as select from "./index";
 
-export default function(){
+export default function() {
     select.Binary.test();
     select.Sequential.test();
+    select.BST.test();
 }

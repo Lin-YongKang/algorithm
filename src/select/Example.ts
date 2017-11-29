@@ -1,6 +1,6 @@
 import Comparer from "../interface/Comparer";
 import { Comparable, Indexable } from "interface";
-import * as assert from 'assert';
+import * as assert from "assert";
 
 const STRING = "SEARCHEXAMPLE";
 const MAP: Indexable = {
@@ -14,11 +14,11 @@ const MAP: Indexable = {
     R: 3,
     S: 0,
     X: 7
-}
-const LIST = ['A', 'C', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'X'];
+};
+const LIST = ["A", "C", "E", "H", "L", "M", "P", "R", "S", "X"];
 export abstract class DisorderedTableExample<K, V> extends Comparer {
     public static general() {
-        interface That extends DisorderedTableExample<any, any> { }
+        interface That extends DisorderedTableExample<any, any> {}
         let That = <any>this;
         let target: That = new That();
         for (let i = 0, len = STRING.length; i < len; i++) {
@@ -50,8 +50,9 @@ export abstract class DisorderedTableExample<K, V> extends Comparer {
 export abstract class OrderedTableExample<K extends Comparable, V> extends DisorderedTableExample<K, V> {
     public static test() {
         let target = this.general();
+        let TL = LIST.concat([]);
         for (let key of target.keys()) {
-            assert.equal(key, LIST.shift());
+            assert.equal(key, TL.shift());
             assert.equal(target.get(key), MAP[key]);
         }
     }
@@ -65,18 +66,18 @@ export abstract class OrderedTableExample<K extends Comparable, V> extends Disor
     abstract max(): K;
     /**
      * 小于等于{@code key}的最大值
-     * @param key 
+     * @param key
      */
     abstract floor(key: K): K;
     /**
      * 大于等于{@code key}的最小值
-     * @param key 
+     * @param key
      */
     abstract ceil(key: K): K;
     /**
      * 小于{@code key}的数量
-     * @param key 
-     * 
+     * @param key
+     *
      */
     abstract rank(key: K): number;
     /**
