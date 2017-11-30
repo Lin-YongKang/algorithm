@@ -1,9 +1,4 @@
-import { createReadStream } from "fs";
-import Bag from '../interface/Bag';
-import * as readline from 'readline';
-import * as path from 'path';
-
-const FILE = path.resolve(__dirname, "../../data/tinyG.txt");
+import Bag from "../interface/Bag";
 export default class Graph {
     private _V: number;
     private _E: number;
@@ -11,7 +6,7 @@ export default class Graph {
     constructor(V: number);
     constructor(rs: string[]);
     constructor(rs: number | string[]) {
-        if (typeof rs === 'number') {
+        if (typeof rs === "number") {
             _createInstance.call(this, rs);
         } else {
             _createInstance.call(this, parseInt(rs[0]));
@@ -30,15 +25,8 @@ export default class Graph {
             }
         }
     }
-    public static test() {
-        let rl = readline.createInterface(createReadStream(FILE));
-        let lines: string[] = [];
-        rl.on("line", (line: string) => {
-            lines.push(line);
-        });
-        rl.on('close', () => {
-            console.log(new Graph(lines).toString());
-        });
+    public static test(lines: string[]) {
+        console.log(new Graph(lines).toString());
     }
     public V(): number {
         return this._V;
@@ -69,8 +57,8 @@ export default class Graph {
         let degree = 0;
         for (let w of G.adj(v)) {
             w;
-            degree++
-        };
+            degree++;
+        }
         return degree;
     }
     public static maxDegree(G: Graph) {
