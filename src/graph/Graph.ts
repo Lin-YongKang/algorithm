@@ -1,4 +1,13 @@
 import Bag from "../interface/Bag";
+
+/**
+ * 邻接表数据结构
+ * [0] --> Bag
+ * [1] --> Bag
+ * [2] --> Bag
+ * [3] --> Bag
+ * [4] --> Bag
+ */
 export default class Graph {
     private _V: number;
     private _E: number;

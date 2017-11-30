@@ -8,8 +8,10 @@ interface SearchClass {
     test(lines: string[], s: number): void;
 }
 
+// 深度搜索算法
 export let DepthFirst: SearchClass = class {
     private _marked: boolean[];
+    // 记录连通点的数量
     private _count: number;
     constructor(G: Graph, s: number) {
         this._marked = new Array(G.V());
@@ -17,12 +19,15 @@ export let DepthFirst: SearchClass = class {
         this.dfs(G, s);
     }
     private dfs(G: Graph, v: number): void {
+        // 当访问一个定点是
+        //将它标记为已访问；
         this._marked[v] = true;
         this._count++;
+        // 递归地访问它的所有没有被标记的邻居顶点
         for (let w of G.adj(v)) if (!this.marked(w)) this.dfs(G, w);
     }
     public marked(w: number): boolean {
-        return this._marked[w];
+        return !!this._marked[w];
     }
     public count(): number {
         return this._count;
