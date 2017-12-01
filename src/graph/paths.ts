@@ -1,4 +1,4 @@
-import { Queue } from "../interface/BasicSet";
+import { Queue, Stack } from "../interface/BasicSet";
 import { PGraph } from "./Graph";
 interface Paths {
     hasPathTo(v: number): boolean;
@@ -40,12 +40,12 @@ export let DepthFirstPaths: PathsClass = class {
         //v节点与根节点是否连通
         if (!this.hasPathTo(v)) return null;
 
-        let path = new Array();
+        let path = new Stack<typeof v>();
         //因为v节点与根节点是连通的，我们从v节点出发，找到在深度搜索时，v节点是从edgeTo[v]深度搜索过来，一直到根节点，就形成一条路径；
         for (let x = v; x != this.s; x = this.edgeTo[x]) {
-            path.unshift(x);
+            path.push(x);
         }
-        path.unshift(this.s);
+        path.push(this.s);
         return path;
     }
     public static test(graph: PGraph, s: number): void {
@@ -93,12 +93,12 @@ export let BreadthFirstPaths: PathsClass = class {
     }
     public pathTo(v: number): Iterable<typeof v> {
         if (!this.hasPathTo(v)) return null;
-        let path = new Array();
+        let path = new Stack<typeof v>();
 
         for (let x = v; x != this.s; x = this.edgeTo[x]) {
-            path.unshift(x);
+            path.push(x);
         }
-        path.unshift(this.s);
+        path.push(this.s);
         return path;
     }
     public static test(graph: PGraph, s: number): void {

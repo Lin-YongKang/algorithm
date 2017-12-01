@@ -1,4 +1,4 @@
-import { Queue } from "../interface/BasicSet";
+import { Queue, Stack } from "../interface/BasicSet";
 import { Digraph, Graph, PGraph } from "./Graph";
 abstract class Search {
     protected _marked: boolean[];
@@ -95,5 +95,42 @@ export class DirectedDepthFirst extends Search {
             if (reachable.marked(v)) str += `${v} `;
         }
         console.log(str);
+    }
+}
+
+export class DepthFirstOrder {
+    private marked: boolean[];
+    private _pre: Queue<number>;
+    private _post: Queue<number>;
+    private _reversePost: Stack<number>;
+    constructor(graph: Digraph) {
+        this._pre = new Queue();
+        this._post = new Queue();
+        this._reversePost = new Stack();
+        let VLen = graph.V();
+        this.marked = new Array(VLen);
+        for (let v = 0; v < VLen; v++) {
+            if (!this.marked[v]) this.dfs(graph, v);
+        }
+    }
+    private dfs(graph: Digraph, v: number): void {
+        this._pre.enqueue(v);
+        this.marked[v] = true;
+        for (let w of graph.adj(v)) {
+            if (!this.marked[w]) {
+                this.dfs(graph, w);
+            }
+        }
+        this._post.enqueue(v);
+        this._reversePost.push(v);
+    }
+    public pre(): Iterable<number> {
+        return this._pre;
+    }
+    public post(): Iterable<number> {
+        return this._post;
+    }
+    public reversePost(): Iterable<number> {
+        return this._reversePost;
     }
 }

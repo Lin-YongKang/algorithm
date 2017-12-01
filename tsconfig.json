@@ -19,7 +19,7 @@
         "pretty": true,
         "strictNullChecks": false,
         "traceResolution": true,
-        "strict":true,
+        "strict": true,
         "baseUrl": "src",
         "paths": {
             "$root": ["../index"],
