@@ -1,5 +1,4 @@
-import Bag from "../interface/Bag";
-
+import { Bag } from "../interface/BasicSet";
 /**
  * 邻接表数据结构
  * [0] --> Bag

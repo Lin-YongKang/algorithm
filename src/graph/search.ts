@@ -1,3 +1,4 @@
+import { Queue } from "../interface/BasicSet";
 import { Digraph, Graph, PGraph } from "./Graph";
 abstract class Search {
     protected _marked: boolean[];
@@ -56,15 +57,15 @@ export class BreadthFirst extends Search {
     private bfs(graph: Graph, v: number): void {
         // 当访问一个定点是
         //将它标记为已访问；
-        let queue = new Array();
-        queue.push(v);
+        let queue = new Queue<typeof v>();
+        queue.enqueue(v);
         this._marked[v] = true;
-        while (queue.length !== 0) {
-            let m = queue.shift();
+        while (!queue.isEmpty()) {
+            let m = queue.dequeue();
             this._count++;
             for (let w of graph.adj(m)) {
                 if (!this.marked(w)) {
-                    queue.push(w);
+                    queue.enqueue(w);
                     this._marked[w] = true;
                 }
             }

@@ -1,5 +1,5 @@
 import { Graph } from "./Graph";
-import Bag from "../interface/Bag";
+import { Bag } from "../interface/BasicSet";
 // 连通分量
 export class CC {
     private _marked: boolean[];

@@ -1,3 +1,4 @@
+import { Queue } from "../interface/BasicSet";
 import { PGraph } from "./Graph";
 interface Paths {
     hasPathTo(v: number): boolean;
@@ -73,16 +74,16 @@ export let BreadthFirstPaths: PathsClass = class {
         this.bfs(graph, s);
     }
     private bfs(graph: PGraph, s: number): void {
-        let queue = new Array();
+        let queue = new Queue<typeof s>();
         this.marked[s] = true;
-        queue.push(s);
-        while (queue.length !== 0) {
-            let v = queue.shift();
+        queue.enqueue(s);
+        while (!queue.isEmpty()) {
+            let v = queue.dequeue();
             for (let w of graph.adj(v)) {
                 if (!this.marked[w]) {
                     this.edgeTo[w] = v;
                     this.marked[w] = true;
-                    queue.push(w);
+                    queue.enqueue(w);
                 }
             }
         }
