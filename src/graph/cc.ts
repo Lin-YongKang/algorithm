@@ -1,5 +1,6 @@
-import Graph from './Graph';
-import Bag from '../interface/Bag';
+import { Graph } from "./Graph";
+import Bag from "../interface/Bag";
+// 连通分量
 export class CC {
     private _marked: boolean[];
     private _id: number[];
@@ -29,7 +30,7 @@ export class CC {
             if (!this._marked[w]) this.dfs(graph, w);
         }
     }
-    public id(v:number){
+    public id(v: number) {
         return this._id[v];
     }
     public connected(v: number, w: number): boolean {
@@ -38,23 +39,22 @@ export class CC {
     public count(): number {
         return this._count;
     }
-    public static test(lines:string[]){
-        let graph = new Graph(lines);
+    public static test(graph: Graph) {
         let cc = new this(graph);
         let m = cc.count();
         console.log(`${m} components`);
 
-        let components:Bag<number>[] = new Array(m);
-        for(let i = 0 ; i < m ; i++){
+        let components: Bag<number>[] = new Array(m);
+        for (let i = 0; i < m; i++) {
             components[i] = new Bag();
         }
-        for(let i = 0 ,v = graph.V(); i < v;i++){
+        for (let i = 0, v = graph.V(); i < v; i++) {
             components[cc.id(i)].add(i);
         }
-        for(let i = 0;i < m;i++){
-            let s = ""
-            for(let v of components[i]){
-                s +=`${v} `;
+        for (let i = 0; i < m; i++) {
+            let s = "";
+            for (let v of components[i]) {
+                s += `${v} `;
             }
             console.log(s);
         }

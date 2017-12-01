@@ -1,9 +1,12 @@
 import { createReadStream } from "fs";
 import * as readline from "readline";
 import * as path from "path";
-import { DepthFirst, BreadthFirst } from "./search";
+import { DepthFirst, BreadthFirst, DirectedDepthFirst } from "./search";
 import { DepthFirstPaths, BreadthFirstPaths } from "./paths";
-import {CC} from "./cc";
+import { Cycle } from "./cycle";
+import { TwoColor } from "./twoColor";
+import { CC } from "./cc";
+import { Digraph, Graph } from "./Graph";
 function readFile(FILE: string): Promise<string[]> {
     return new Promise(resolve => {
         let rl = readline.createInterface(createReadStream(FILE));
@@ -18,15 +21,36 @@ function readFile(FILE: string): Promise<string[]> {
 }
 const tinyG = path.resolve(__dirname, "../../data/tinyG.txt");
 const tinyGG = path.resolve(__dirname, "../../data/tinyGG.txt");
-export default async function () {
-    let [tinyGLines, tinyGGLines] = await Promise.all([readFile(tinyG), readFile(tinyGG)]);
+const tinyDG = path.resolve(__dirname, "../../data/tinyDG.txt");
+export default async function() {
+    let [tinyGLines, tinyGGLines, tinyDGLines] = await Promise.all([readFile(tinyG), readFile(tinyGG), readFile(tinyDG)]);
+    const graph = new Graph(tinyGLines);
+    const digraph = new Digraph(tinyGLines);
+    Graph.test(tinyGLines);
+    Digraph.test(tinyDGLines);
 
-    DepthFirst.test(tinyGLines, 0);
-    console.log("\n");
-    BreadthFirst.test(tinyGLines, 0);
-    console.log("\n");
-    DepthFirstPaths.test(tinyGGLines, 0);
-    console.log("\n");
-    BreadthFirstPaths.test(tinyGGLines, 0);
-    CC.test(tinyGLines);
+    console.log("DirectedDepthFirst");
+    DirectedDepthFirst.test(digraph, 0);
+
+    console.log("\nDepthFirst");
+
+    DepthFirst.test(graph, 0);
+
+    console.log("\nBreadthFirst");
+    BreadthFirst.test(digraph, 0);
+
+    console.log("\nDepthFirstPaths");
+    DepthFirstPaths.test(graph, 0);
+
+    console.log("\nBreadthFirstPaths");
+    BreadthFirstPaths.test(new Graph(tinyGGLines), 0);
+
+    console.log("\nCC");
+    CC.test(graph);
+
+    console.log("\nCycle");
+    Cycle.test(graph);
+
+    console.log("\nTwoColor");
+    TwoColor.test(graph);
 }

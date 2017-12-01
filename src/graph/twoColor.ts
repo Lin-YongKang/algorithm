@@ -1,4 +1,4 @@
-import Graph from './Graph';
+import { Graph } from "./Graph";
 export class TwoColor {
     private marked: boolean[];
     private color: boolean[];
@@ -26,7 +26,8 @@ export class TwoColor {
     public isTwoColor(): boolean {
         return this._isTwoColor;
     }
-
+    public static test(graph: Graph) {
+        let cycle = new this(graph);
+        console.log(cycle.isTwoColor());
+    }
 }
-
-

@@ -1,11 +1,11 @@
-import Graph from "./Graph";
+import { PGraph } from "./Graph";
 interface Paths {
     hasPathTo(v: number): boolean;
     pathTo(v: number): Iterable<typeof v>;
 }
 interface PathsClass {
-    new (G: Graph, s: number): Paths;
-    test(lines: string[], s: number): void;
+    new (G: PGraph, s: number): Paths;
+    test(G: PGraph, s: number): void;
 }
 /**
  * 单点路径问题
@@ -16,13 +16,13 @@ export let DepthFirstPaths: PathsClass = class {
     private marked: boolean[];
     private edgeTo: number[];
     private readonly s: number;
-    constructor(graph: Graph, s: number) {
+    constructor(graph: PGraph, s: number) {
         this.marked = new Array(graph.V());
         this.edgeTo = new Array(graph.V());
         this.s = s;
         this.dfs(graph, s);
     }
-    private dfs(graph: Graph, s: number): void {
+    private dfs(graph: PGraph, s: number): void {
         this.marked[s] = true;
         for (let w of graph.adj(s)) {
             if (!this.marked[w]) {
@@ -47,8 +47,7 @@ export let DepthFirstPaths: PathsClass = class {
         path.unshift(this.s);
         return path;
     }
-    public static test(lines: string[], s: number): void {
-        let graph = new Graph(lines);
+    public static test(graph: PGraph, s: number): void {
         let paths = new this(graph, s);
         for (let v = 0; v < graph.V(); v++) {
             let str = `${s} to ${v} : `;
@@ -67,13 +66,13 @@ export let BreadthFirstPaths: PathsClass = class {
     private marked: boolean[];
     private edgeTo: number[];
     private readonly s: number;
-    constructor(graph: Graph, s: number) {
+    constructor(graph: PGraph, s: number) {
         this.marked = new Array(graph.V());
         this.edgeTo = new Array(graph.V());
         this.s = s;
         this.bfs(graph, s);
     }
-    private bfs(graph: Graph, s: number): void {
+    private bfs(graph: PGraph, s: number): void {
         let queue = new Array();
         this.marked[s] = true;
         queue.push(s);
@@ -101,8 +100,7 @@ export let BreadthFirstPaths: PathsClass = class {
         path.unshift(this.s);
         return path;
     }
-    public static test(lines: string[], s: number): void {
-        let graph = new Graph(lines);
+    public static test(graph: PGraph, s: number): void {
         let paths = new this(graph, s);
         for (let v = 0; v < graph.V(); v++) {
             let str = `${s} to ${v} : `;
