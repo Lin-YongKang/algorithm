@@ -4,8 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "preinstall": "npm install -g ts-node mocha",
         "start": "ts-node -r tsconfig-paths/register ./src/index",
-        "test": "mocha -r ts-node/register -r tsconfig-paths/register ./test/test.ts",
+        "test": "mocha -r ts-node/register -r tsconfig-paths/register ./test/index.ts",
         "debug": "ts-node --inspect-brk --no-cache -r tsconfig-paths/register   ./src/index",
         "tscw": "tsc --watch",
         "tsc": "tsc"

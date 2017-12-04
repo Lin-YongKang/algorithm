@@ -1,40 +1,4 @@
-import * as assert from "assert";
-const log = console.log;
-/**
- * 判断{@code number}在[lo,hi)之间；
- * @param number 要判断的数
- * @param lo 大于等于lo
- * @param hi 小于hi
- */
-function isInRange(number: number, lo: number, hi: number): boolean {
-    try {
-        let bol = number >= lo && number < hi;
-        assert.ok(bol);
-        return bol;
-    } catch (e) {
-        log(e);
-        log(number, lo, hi);
-    }
-}
-function about<T = boolean>(list: T[], sign: T, min: number, max: number): boolean {
-    let probability = list.filter(item => item === sign).length / list.length;
-    return isInRange(probability, min, max);
-}
-function loop(callback: () => void, count: number = 10): any[] {
-    let list = [];
-    for (let i = 0; i < count; i++) list.push(callback());
-    return list;
-}
-class StdRandom {
-    public static test() {
-        loop(() => isInRange(this.uniform(), 0, 1));
-        loop(() => isInRange(this.uniformFloat(10), 0, 10));
-        loop(() => isInRange(this.uniformFloat(3, 10), 3, 13));
-        loop(() => isInRange(this.uniformInt(10), 0, 10));
-        loop(() => isInRange(this.uniformInt(3, 10), 3, 13));
-        loop(() => about(loop(() => this.bernoulli(), 1000), true, 0.45, 0.55));
-        loop(() => about(loop(() => this.bernoulli(0.2), 1000), true, 0.15, 0.25));
-    }
+export = class StdRandom {
     /**
      * [0,1)之间的实数
      * @return a random real number uniformly in [0, 1)
@@ -70,7 +34,7 @@ class StdRandom {
             hi = lo;
             lo = 0;
         }
-        return lo + this.uniform() * hi;
+        return lo + this.uniform() * (hi - lo);
     }
     /**
      * [0,n)之间的整数
@@ -90,7 +54,7 @@ class StdRandom {
             hi = lo;
             lo = 0;
         }
-        return Math.floor(lo + this.uniform() * hi);
+        return Math.floor(lo + this.uniform() * (hi - lo));
     }
     /**
      * 返回{@code true}的概率为50%;
@@ -108,7 +72,7 @@ class StdRandom {
     public static bernoulli(p: number): boolean;
     public static bernoulli(p?: number) {
         if (p === undefined) return this.bernoulli(0.5);
-        if (p >= 1 || p <= 0) throw new Error("probability p must be between 0.0 and 1.0: " + p);
+        if (p > 1 || p < 0) throw new Error("probability p must be between 0.0 and 1.0: " + p);
         return this.uniform() < p;
     }
     /**
@@ -192,6 +156,4 @@ class StdRandom {
         this.shuffleSelf(l);
         return l;
     }
-}
-
-export default StdRandom;
+};
