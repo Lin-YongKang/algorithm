@@ -22,13 +22,10 @@
         "strict": true,
         "baseUrl": "src",
         "paths": {
-            "$root": ["../index"],
-            "$root/*": ["../*"],
-            "$src": ["index"],
-            "$src/*": ["*"],
-            "$*": ["*"]
+            "src": ["../src/index"],
+            "src/*": ["../src/*"]
         }
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "test/**/*"],
     "exclude": ["node_modules"]
 }

@@ -4,20 +4,19 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node ./dist/index.js",
-        "test": "node ./dist/utils/test",
-        "debug": "node --inspect-brk ./dist/index.js",
+        "start": "ts-node -r tsconfig-paths/register ./src/index",
+        "test": "mocha -r ts-node/register -r tsconfig-paths/register ./test/test.ts",
+        "debug": "ts-node --inspect-brk --no-cache -r tsconfig-paths/register   ./src/index",
         "tscw": "tsc --watch",
         "tsc": "tsc"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@types/chai": "^4.0.7",
+        "@types/mocha": "^2.2.44",
         "@types/node": "^8.0.47",
-        "sexy-require": "^0.1.0"
-    },
-    "path": {
-        "$root": "/",
-        "$src": "/dist"
+        "chai": "^4.1.2",
+        "tsconfig-paths": "^2.4.0"
     }
 }
