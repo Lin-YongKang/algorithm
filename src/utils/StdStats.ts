@@ -4,7 +4,7 @@ let StdStats: Indexable = class {
         return list.reduce((prev, next) => (prev > next ? prev : next));
     }
     public static min(list: number[]): typeof list[0] {
-        return list.reduce((prev, next) => (prev > next ? prev : next));
+        return list.reduce((prev, next) => (prev < next ? prev : next));
     }
     public static mean(list: number[]): typeof list[0] {
         return this.sum(list) / list.length;
@@ -19,11 +19,6 @@ let StdStats: Indexable = class {
     }
     public static sum(list: number[]): typeof list[0] {
         return list.reduce((prev, next) => prev + next);
-    }
-    public static test() {
-        let list = Array.from({ length: 10 }, (v, i) => i);
-        let keys = ["max", "min", "mean", "var", "stddev", "sum"];
-        keys.forEach(key => console.log(key, " ", StdStats[key](list)));
     }
 };
 export default StdStats;
