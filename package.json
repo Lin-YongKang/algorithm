@@ -8,6 +8,7 @@
         "start": "ts-node -r tsconfig-paths/register ./src/index",
         "test": "mocha -r ts-node/register -r tsconfig-paths/register ./test/index.ts",
         "debug": "ts-node --inspect-brk --no-cache -r tsconfig-paths/register   ./src/index",
+        "debug-test": "mocha -r ts-node/register --inspect-brk --no-cache  -r tsconfig-paths/register ./test/index.ts",
         "tscw": "tsc --watch",
         "tsc": "tsc"
     },
