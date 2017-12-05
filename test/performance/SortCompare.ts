@@ -1,6 +1,6 @@
-import StdRandom from "./StdRandom";
-import * as sort from "../sort";
-import Stopwatch from "./Stopwatch";
+import StdRandom from "src/utils/StdRandom";
+import * as sort from "src/sort";
+import Stopwatch from "src/utils/Stopwatch";
 export default class SortCompare {
     /**
      *

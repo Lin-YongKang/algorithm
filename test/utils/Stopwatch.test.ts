@@ -6,10 +6,10 @@ describe("Stopwatch 计时器", function() {
         let sw = new Stopwatch();
         expect(sw.elapsedTime()).to.be.below(0.1);
         setTimeout(() => {
-            expect(sw.elapsedTime()).to.be.within(0.5, 0.6);
+            expect(sw.elapsedTime()).to.be.within(0.4, 0.6);
         }, 500);
         setTimeout(() => {
-            expect(sw.elapsedTime()).to.be.within(1, 1.1);
+            expect(sw.elapsedTime()).to.be.within(0.9, 1.1);
             done();
         }, 1000);
     });
@@ -17,10 +17,10 @@ describe("Stopwatch 计时器", function() {
         let sw = new Stopwatch();
         expect(sw.intervalTime()).to.be.below(0.1);
         setTimeout(() => {
-            expect(sw.intervalTime()).to.be.within(0.5, 0.6);
+            expect(sw.intervalTime()).to.be.within(0.4, 0.6);
         }, 500);
         setTimeout(() => {
-            expect(sw.intervalTime()).to.be.within(0.5, 0.6);
+            expect(sw.intervalTime()).to.be.within(0.4, 0.6);
             done();
         }, 1000);
     });

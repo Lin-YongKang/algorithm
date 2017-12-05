@@ -1,8 +1,8 @@
-import * as select from "../select";
+import * as select from "src/select";
 import * as readline from "readline";
 import * as fs from "fs";
 import * as path from "path";
-import Stopwatch from "./Stopwatch";
+import Stopwatch from "src/utils/Stopwatch";
 const FILE = path.resolve(__dirname, "../../data/leipzig1m.txt");
 type Param = typeof select.DisorderedTableExample | typeof select.OrderedTableExample;
 export default class FrequencyCounter {

@@ -23,7 +23,10 @@
         "baseUrl": "src",
         "paths": {
             "src": ["../src/index"],
-            "src/*": ["../src/*"]
+            "src/*": ["../src/*"],
+            "test": ["../test/index"],
+            "test/*": ["../test/*"],
+            "root/*": ["../*"]
         }
     },
     "include": ["src/**/*", "test/**/*"],
