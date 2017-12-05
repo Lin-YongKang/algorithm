@@ -1,4 +1,4 @@
-export = class StdRandom {
+export default class StdRandom {
     /**
      * [0,1)之间的实数
      * @return a random real number uniformly in [0, 1)
@@ -156,4 +156,4 @@ export = class StdRandom {
         this.shuffleSelf(l);
         return l;
     }
-};
+}

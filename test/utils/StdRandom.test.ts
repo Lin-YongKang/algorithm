@@ -1,6 +1,5 @@
-import StdRandom = require("src/utils/StdRandom");
-import chai = require("chai");
-const { expect } = chai;
+import StdRandom from "src/utils/StdRandom";
+import { expect } from "chai";
 describe("StdRandom 随机数生成工具类", function() {
     const count = 100,
         minInt = 40,
