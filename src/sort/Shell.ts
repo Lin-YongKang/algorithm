@@ -1,7 +1,7 @@
-import { Comparables } from "../interface";
-import Example from "./index";
+import { Comparables } from "src/interface";
+import Sorter from "./Sorter";
 
-export default class Shell extends Example {
+export default class Shell extends Sorter {
     public static sortSelf(list: Comparables): void {
         let len = list.length;
         let h = 1;

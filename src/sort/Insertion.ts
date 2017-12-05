@@ -1,6 +1,6 @@
-import { Comparables } from "../interface";
-import Example from "./index";
-export default class Insertion extends Example {
+import { Comparables } from "src/interface";
+import Sorter from "./Sorter";
+export default class Insertion extends Sorter {
     public static sortSelf(list: Comparables): void {
         let len = list.length;
         for (let i = 1; i < len; i++) {

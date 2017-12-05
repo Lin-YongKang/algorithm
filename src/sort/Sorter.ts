@@ -1,7 +1,6 @@
-import { Comparables } from "../interface";
-import * as assert from "assert";
-import Comparer from "../interface/Comparer";
-export default abstract class Example extends Comparer {
+import { Comparables } from "src/interface";
+import Comparer from "src/interface/Comparer";
+export default abstract class Sorter extends Comparer {
     public static sortSelf(list: Comparables): void {
         throw new Error("sortSelf need overrid");
     }
@@ -15,10 +14,5 @@ export default abstract class Example extends Comparer {
             if (this.less(list[i], list[i - 1])) return false;
         }
         return true;
-    }
-    public static test(list: any[]) {
-        let sortedList = this.sort(list);
-        console.log(sortedList);
-        assert.ok(this.isSorted(sortedList));
     }
 }

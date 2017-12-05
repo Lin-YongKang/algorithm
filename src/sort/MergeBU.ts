@@ -1,11 +1,11 @@
-import { Comparables } from "../interface";
-import Example from "./index";
+import { Comparables } from "src/interface";
+import Sorter from "./Sorter";
 /**
  * @description
  * 自底向上的归并排序
  * 对全部最小分解的数组进行排序，然后两两归并
  */
-export default class MergeBU extends Example {
+export default class MergeBU extends Sorter {
     private static aux: Comparables;
 
     public static sortSelf(list: Comparables): void {

@@ -1,10 +1,10 @@
-import Example from "./Example";
-export default Example;
+import Sorter from "./Sorter";
 import Insertion from "./Insertion";
-import Selection from "./Selection";
-import Shell from "./Shell";
 import Merge from "./Merge";
 import MergeBU from "./MergeBU";
 import Quick from "./Quick";
+import Selection from "./Selection";
+import Shell from "./Shell";
 
-export { Insertion, Selection, Shell, Merge, MergeBU, Quick, Example };
+export default Sorter;
+export { Insertion, Selection, Shell, Merge, MergeBU, Quick };
