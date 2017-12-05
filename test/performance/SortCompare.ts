@@ -1,5 +1,5 @@
 import StdRandom from "src/utils/StdRandom";
-import * as sort from "src/sort";
+import Sorter from "src/sort";
 import Stopwatch from "src/utils/Stopwatch";
 export default class SortCompare {
     /**
@@ -14,7 +14,7 @@ export default class SortCompare {
         while (t--) nList[t] = StdRandom.uniformIntList(min, max, n);
         return nList;
     }
-    public static sort(Sort: typeof sort.Example, nList: number[][]) {
+    public static sort(Sort: typeof Sorter, nList: number[][]) {
         let timer = new Stopwatch();
         for (let i = 0, len = nList.length; i < len; i++) {
             Sort.sort(nList[i]);
@@ -22,7 +22,7 @@ export default class SortCompare {
         }
         return timer.elapsedTime();
     }
-    public static test(...Sorts: typeof sort.Example[]) {
+    public static test(...Sorts: typeof Sorter[]) {
         let nList = this.randomInput(0, 100000, 20000, 30);
         let ts = Sorts.map(Sort => this.sort(Sort, nList));
         ts.forEach((t, index) => console.log(Sorts[index].name, t));
