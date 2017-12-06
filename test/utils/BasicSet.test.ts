@@ -1,4 +1,4 @@
-import { Bag, Stack, Queue } from "src/utils/BasicSet";
+import { Bag, Stack, Queue, MaxPQ, IndexMaxPQ } from "src/utils/BasicSet";
 import { expect } from "chai";
 
 describe("BasicSet 基本数据结构", () => {
@@ -58,5 +58,47 @@ describe("BasicSet 基本数据结构", () => {
         for (let value of queue) {
             expect(value).to.be.equal(arr.shift());
         }
+    });
+
+    it("MaxPQ", () => {
+        const maxPQ = new MaxPQ<number>();
+        const list = [0, 4, 5, 6, 7, 8, 9, 1, 2, 3];
+
+        expect(maxPQ.isEmpty()).to.be.true;
+        expect(maxPQ.size()).to.be.equal(0);
+        list.forEach(v => maxPQ.insert(v));
+        expect(maxPQ.isEmpty()).to.be.false;
+        expect(maxPQ.size()).to.be.equal(list.length);
+
+        for (let i = list.length - 1; i >= 0; i--) {
+            expect(maxPQ.max()).to.be.equal(i);
+            expect(maxPQ.delMax()).to.be.equal(i);
+        }
+        expect(maxPQ.isEmpty()).to.be.true;
+        expect(maxPQ.size()).to.be.equal(0);
+    });
+
+    it("IndexMaxPQ", () => {
+        const indexMaxPQ = new IndexMaxPQ<{ num: number }>();
+        const list = [0, 4, 5, 6, 7, 8, 9, 1, 2, 3];
+
+        expect(indexMaxPQ.isEmpty()).to.be.true;
+        expect(indexMaxPQ.size()).to.be.equal(0);
+        list.forEach(v => indexMaxPQ.insert(v, { num: v }));
+        expect(indexMaxPQ.isEmpty()).to.be.false;
+        expect(indexMaxPQ.size()).to.be.equal(list.length);
+
+        for (let i = list.length - 1; i >= 0; i--) {
+            expect(indexMaxPQ.contains(i)).to.be.true;
+            expect(indexMaxPQ.maxIndex()).to.be.equal(i);
+            expect(indexMaxPQ.max()).to.deep.equal({ num: i });
+            expect(indexMaxPQ.delMax()).to.deep.equal({ num: i });
+        }
+        expect(indexMaxPQ.isEmpty()).to.be.true;
+        expect(indexMaxPQ.size()).to.be.equal(0);
+
+        indexMaxPQ.insert(10, { num: 10 });
+        indexMaxPQ.change(10, { num: 11 });
+        expect(indexMaxPQ.max()).to.deep.equal({ num: 11 });
     });
 });
