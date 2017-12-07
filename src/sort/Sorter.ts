@@ -11,7 +11,9 @@ export default abstract class Sorter extends Comparer {
     }
     public static isSorted(list: Comparables): boolean {
         for (let i = 1; i < list.length; i++) {
-            if (this.less(list[i], list[i - 1])) return false;
+            if (this.less(list[i], list[i - 1])) {
+                return false;
+            }
         }
         return true;
     }

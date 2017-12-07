@@ -25,6 +25,17 @@
             "outFiles": ["/dist"],
             "runtimeArgs": ["run", "debug-test"],
             "port": 9229
+        },
+        {
+            "name": "pf debug",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": "npm",
+            "sourceMaps": true,
+            "outFiles": ["/dist"],
+            "runtimeArgs": ["run", "debug-pf"],
+            "port": 9229
         }
     ]
 }

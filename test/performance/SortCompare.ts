@@ -17,13 +17,14 @@ export default class SortCompare {
     public static sort(Sort: typeof Sorter, nList: number[][]) {
         let timer = new Stopwatch();
         for (let i = 0, len = nList.length; i < len; i++) {
-            Sort.sort(nList[i]);
+            let result = Sort.sort(nList[i]);
+            if (!Sort.isSorted(result)) throw new Error(`${Sort.name} sort fail.Param : ${nList[i]},result : ${result}`);
             console.log(Sort.name, timer.intervalTime());
         }
         return timer.elapsedTime();
     }
     public static test(...Sorts: typeof Sorter[]) {
-        let nList = this.randomInput(0, 100000, 20000, 30);
+        let nList = this.randomInput(0, 100, 20000, 30);
         let ts = Sorts.map(Sort => this.sort(Sort, nList));
         ts.forEach((t, index) => console.log(Sorts[index].name, t));
     }

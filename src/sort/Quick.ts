@@ -2,8 +2,7 @@ import { Comparables } from "src/interface";
 import Sorter from "./Sorter";
 /**
  * @description
- * 自顶到下的归并排序
- * 自上而下，在合并前才会对子数组进行排序
+ * 快速排序
  */
 export default class Quick extends Sorter {
     public static sortSelf(list: Comparables, lo: number, hi: number): void;
