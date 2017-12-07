@@ -24,7 +24,7 @@ export default class SortCompare {
         return timer.elapsedTime();
     }
     public static test(...Sorts: typeof Sorter[]) {
-        let nList = this.randomInput(0, 100, 20000, 30);
+        let nList = this.randomInput(0, 1000000, 20000, 300);
         let ts = Sorts.map(Sort => this.sort(Sort, nList));
         ts.forEach((t, index) => console.log(Sorts[index].name, t));
     }

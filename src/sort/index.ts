@@ -6,5 +6,6 @@ import Quick from "./Quick";
 import Selection from "./Selection";
 import Shell from "./Shell";
 import QuickThree from "./QuickThree";
+import Heap from "./Heap";
 export default Sorter;
-export { Insertion, Selection, Shell, Merge, MergeBU, Quick, QuickThree };
+export { Insertion, Selection, Shell, Merge, MergeBU, Quick, QuickThree, Heap };

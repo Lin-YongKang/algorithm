@@ -1,5 +1,5 @@
 import Sorter from "src/sort";
-import { Insertion, Selection, Shell, Merge, MergeBU, Quick, QuickThree } from "src/sort";
+import { Insertion, Selection, Shell, Merge, MergeBU, Quick, QuickThree, Heap } from "src/sort";
 import { expect } from "chai";
 
 describe("sort", () => {
@@ -47,5 +47,11 @@ describe("sort", () => {
         expect(QuickThree.sort(list), "Reverse").to.have.ordered.members(result);
         expect(QuickThree.sort(random), "random").to.have.ordered.members(result);
         expect(QuickThree.sort(hasSame), "same").to.have.ordered.members(hasSameResult);
+    });
+
+    it("Heap", () => {
+        expect(Heap.sort(list), "Reverse").to.have.ordered.members(result);
+        expect(Heap.sort(random), "random").to.have.ordered.members(result);
+        expect(Heap.sort(hasSame), "same").to.have.ordered.members(hasSameResult);
     });
 });
