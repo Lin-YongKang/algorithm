@@ -1,4 +1,4 @@
-import { Sequential, Binary, BST } from "src/select";
+import { Sequential, Binary, BST, RedBlackBST } from "src/select";
 import { expect } from "chai";
 import { Indexable } from "src/interface";
 import { DisorderedTableSelecter, OrderedTableSelecter } from "src/select/Selecter";
@@ -60,7 +60,8 @@ describe("select", () => {
             expect(select.floor("B"), "floor").to.be.equal("A");
             expect(select.rank("H"), "rank").to.be.equal(3);
 
-            select.deleteMax();
+            let m = select.deleteMax();
+            m;
             expect(select.max(), "deleteMax").to.be.equal(orderedResult[orderedResult.length - 2]);
 
             select.deleteMin();
@@ -75,6 +76,9 @@ describe("select", () => {
         });
         it("BST", () => {
             OrderedTest(new BST());
+        });
+        it("RedBlackBST", () => {
+            OrderedTest(new RedBlackBST());
         });
     });
 });
