@@ -1,7 +1,7 @@
 import Comparer from "src/interface/Comparer";
 import { Comparable } from "interface";
 
-export abstract class DisorderedTableSelecter<K, V> extends Comparer {
+abstract class Selecter<K, V> extends Comparer {
     abstract put(key: K, value: V): void;
     abstract get(key: K): V;
     abstract size(): number;
@@ -17,7 +17,9 @@ export abstract class DisorderedTableSelecter<K, V> extends Comparer {
     }
 }
 
-export abstract class OrderedTableSelecter<K extends Comparable, V> extends DisorderedTableSelecter<K, V> {
+export abstract class DisorderedTableSelecter<K, V> extends Selecter<K, V> {}
+
+export abstract class OrderedTableSelecter<K extends Comparable, V> extends Selecter<K, V> {
     /**
      * 最小的key
      */

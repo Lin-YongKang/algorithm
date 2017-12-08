@@ -1,10 +1,10 @@
-import { Sequential } from "src/select";
+import { Sequential, Binary } from "src/select";
 import { expect } from "chai";
 import { Indexable } from "src/interface";
-import { DisorderedTableSelecter } from "src/select/Selecter";
+import { DisorderedTableSelecter, OrderedTableSelecter } from "src/select/Selecter";
 describe("select", () => {
     const sentence = "SEARCHEXAMPLE";
-    const disorderedResult: Indexable = {
+    const result: Indexable = {
         A: 8,
         C: 4,
         E: 12,
@@ -16,8 +16,8 @@ describe("select", () => {
         S: 0,
         X: 7
     };
-    // };
-    // const LIST = ["A", "C", "E", "H", "L", "M", "P", "R", "S", "X"];
+
+    const orderedResult = ["A", "C", "E", "H", "L", "M", "P", "R", "S", "X"];
     describe("disordered table", () => {
         function DisorderedTest(select: DisorderedTableSelecter<string, number>) {
             expect(select.isEmpty(), "isEmpty").to.be.true;
@@ -28,7 +28,7 @@ describe("select", () => {
             expect(select.size(), "size").to.be.equal(10);
 
             for (let key of select.keys()) {
-                expect(select.get(key), `get ${key}`).to.be.equal(disorderedResult[key]);
+                expect(select.get(key), `get ${key}`).to.be.equal(result[key]);
             }
 
             expect(select.contains("A"), "brfore delete call contains").to.be.true;
@@ -37,6 +37,34 @@ describe("select", () => {
         }
         it("Sequential", () => {
             DisorderedTest(new Sequential());
+        });
+    });
+    describe("ordered table", () => {
+        function OrderedTest(select: OrderedTableSelecter<string, number>) {
+            expect(select.isEmpty(), "isEmpty").to.be.true;
+            for (let i = 0, len = sentence.length; i < len; i++) {
+                select.put(sentence.charAt(i), i);
+            }
+
+            expect(select.size(), "size").to.be.equal(10);
+
+            let i = 0;
+            for (let key of select.keys()) {
+                expect(select.get(key), `get ${key}`).to.be.equal(result[key]);
+                expect(key, `get ${key}`).to.be.equal(orderedResult[i++]);
+            }
+            expect(select.min(), "min").to.be.equal(orderedResult[0]);
+            expect(select.max(), "max").to.be.equal(orderedResult[orderedResult.length - 1]);
+            expect(select.select(1), "select").to.be.equal(orderedResult[1]);
+            expect(select.ceil("B"), "ceil").to.be.equal("C");
+            expect(select.floor("B"), "floor").to.be.equal("A");
+
+            expect(select.contains("A"), "brfore delete call contains").to.be.true;
+            select.delete("A");
+            expect(select.contains("A"), "after delete call contains").to.be.false;
+        }
+        it("Binary", () => {
+            OrderedTest(new Binary());
         });
     });
 });

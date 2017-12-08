@@ -1,7 +1,7 @@
-import { OrderedTableExample } from "./index";
-import { Comparable } from "../interface";
+import { OrderedTableSelecter } from "./index";
+import { Comparable } from "src/interface";
 
-export default class Binary<K extends Comparable, V> extends OrderedTableExample<K, V> {
+export default class Binary<K extends Comparable, V> extends OrderedTableSelecter<K, V> {
     private ks: K[];
     private vs: V[];
     private get len() {
@@ -14,6 +14,7 @@ export default class Binary<K extends Comparable, V> extends OrderedTableExample
     }
     public get(key: K): V {
         if (this.isEmpty()) return null;
+        // 进行二分查找
         let i = this.rank(key);
         if (i < this.len && Binary.equal(this.ks[i], key)) return this.vs[i];
         else return null;
@@ -33,8 +34,10 @@ export default class Binary<K extends Comparable, V> extends OrderedTableExample
             this.vs[i] = value;
         }
     }
+    // 非递归的二分查找算法
     public rank(key: K): number {
-        let lo = 0, hi = this.len - 1;
+        let lo = 0,
+            hi = this.len - 1;
         while (lo <= hi) {
             let mid = lo + Math.floor((hi - lo) / 2);
             let cmp = Binary.compareWith(key, this.ks[mid]);
