@@ -1,5 +1,5 @@
 import Comparer from "src/interface/Comparer";
-import { Comparable } from "interface";
+import { Comparable } from "src/interface";
 
 abstract class Selecter<K, V> extends Comparer {
     abstract put(key: K, value: V): void;

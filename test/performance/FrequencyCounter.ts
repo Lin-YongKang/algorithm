@@ -1,21 +1,20 @@
 import * as select from "src/select";
 import * as readline from "readline";
 import * as fs from "fs";
-import * as path from "path";
 import Stopwatch from "src/utils/Stopwatch";
-const FILE = path.resolve(__dirname, "../../data/leipzig1m.txt");
-type Param = typeof select.DisorderedTableExample | typeof select.OrderedTableExample;
+type Param = typeof select.DisorderedTableSelecter | typeof select.OrderedTableSelecter;
 export default class FrequencyCounter {
     public static test(...Selects: Param[]) {
-        this.readFile(FILE).then(lines => {
-            Selects.forEach(select => {
-                this.selection(select, lines);
+        this.readFile("test/data/leipzig1m.txt").then(lines => {
+            Selects.forEach(Select => {
+                this.selection(Select, lines);
             });
         });
     }
     public static selection(Select: Param, lines: string[][]) {
         let watch = new Stopwatch();
-        let target = Select.general();
+        let That = <any>Select;
+        let target = new That();
         console.log(Select.name, "before put", watch.intervalTime());
         lines.forEach(words => {
             words.forEach(word => {
@@ -26,12 +25,12 @@ export default class FrequencyCounter {
         console.log(Select.name, "after put", watch.intervalTime());
         console.log(Select.name, "before max", watch.intervalTime());
         let max = "";
-        if (target instanceof select.DisorderedTableExample) {
+        if (target instanceof select.DisorderedTableSelecter) {
             target.put(max, 0);
             for (let word of target.keys()) {
                 if (target.get(word) > target.get(max)) max = word;
             }
-        } else if (target instanceof select.OrderedTableExample) {
+        } else if (target instanceof select.OrderedTableSelecter) {
             max = target.max();
         }
         console.log(Select.name, "after max", watch.intervalTime());
