@@ -1,7 +1,7 @@
-import { DisorderedTableExample } from "./Example";
-import Node from "../interface/Node";
+import { DisorderedTableSelecter } from "src/select";
+import Node from "src/interface/Node";
 
-export default class Sequential<K, V> extends DisorderedTableExample<K, V>{
+export default class Sequential<K, V> extends DisorderedTableSelecter<K, V> {
     private first: Node<K, V>;
     public get(key: K): V {
         for (let node of this) {
@@ -34,11 +34,11 @@ export default class Sequential<K, V> extends DisorderedTableExample<K, V>{
             next() {
                 if (node != null) {
                     let n = node;
-                    node = node.next
+                    node = node.next;
                     return { done: false, value: n };
                 }
                 return { done: true, value: undefined };
             }
-        }
+        };
     }
 }

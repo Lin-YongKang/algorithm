@@ -1,37 +1,7 @@
-import Comparer from "../interface/Comparer";
-import { Comparable, Indexable } from "interface";
-import * as assert from "assert";
+import Comparer from "src/interface/Comparer";
+import { Comparable } from "interface";
 
-const STRING = "SEARCHEXAMPLE";
-const MAP: Indexable = {
-    A: 8,
-    C: 4,
-    E: 12,
-    H: 5,
-    L: 11,
-    M: 9,
-    P: 10,
-    R: 3,
-    S: 0,
-    X: 7
-};
-const LIST = ["A", "C", "E", "H", "L", "M", "P", "R", "S", "X"];
-export abstract class DisorderedTableExample<K, V> extends Comparer {
-    public static general() {
-        interface That extends DisorderedTableExample<any, any> {}
-        let That = <any>this;
-        let target: That = new That();
-        for (let i = 0, len = STRING.length; i < len; i++) {
-            target.put(STRING.charAt(i), i);
-        }
-        return target;
-    }
-    public static test() {
-        let target = this.general();
-        for (let key of target.keys()) {
-            assert.equal(target.get(key), MAP[key]);
-        }
-    }
+export abstract class DisorderedTableSelecter<K, V> extends Comparer {
     abstract put(key: K, value: V): void;
     abstract get(key: K): V;
     abstract size(): number;
@@ -47,15 +17,7 @@ export abstract class DisorderedTableExample<K, V> extends Comparer {
     }
 }
 
-export abstract class OrderedTableExample<K extends Comparable, V> extends DisorderedTableExample<K, V> {
-    public static test() {
-        let target = this.general();
-        let TL = LIST.concat([]);
-        for (let key of target.keys()) {
-            assert.equal(key, TL.shift());
-            assert.equal(target.get(key), MAP[key]);
-        }
-    }
+export abstract class OrderedTableSelecter<K extends Comparable, V> extends DisorderedTableSelecter<K, V> {
     /**
      * 最小的key
      */
@@ -100,7 +62,7 @@ export abstract class OrderedTableExample<K extends Comparable, V> extends Disor
     public size<T extends K>(lo: T, hi: T): number;
     public size(lo?: K, hi?: K): number {
         if (lo !== undefined) {
-            if (!OrderedTableExample.less(lo, hi)) {
+            if (!OrderedTableSelecter.less(lo, hi)) {
                 return 0;
             } else if (this.contains(hi)) {
                 return this.rank(hi) - this.rank(lo) - 1;
