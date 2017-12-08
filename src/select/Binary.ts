@@ -20,6 +20,7 @@ export default class Binary<K extends Comparable, V> extends OrderedTableSelecte
         else return null;
     }
     public put(key: K, value: V): void {
+        // 构建按key排序的数组
         let i = this.rank(key);
         if (i < this.len && Binary.equal(this.ks[i], key)) {
             // 找到key就更新值

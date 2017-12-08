@@ -1,6 +1,6 @@
-import Node from "../interface/Node";
-import { OrderedTableExample } from "./index";
-import { Comparable } from "../interface";
+import Node from "src/interface/Node";
+import { OrderedTableSelecter } from "./index";
+import { Comparable } from "src/interface";
 
 class BNode<K, V> extends Node<K, V> {
     public left: BNode<K, V>;
@@ -14,7 +14,7 @@ class BNode<K, V> extends Node<K, V> {
     }
 }
 
-export default class BST<K extends Comparable, V> extends OrderedTableExample<K, V> {
+export default class BST<K extends Comparable, V> extends OrderedTableSelecter<K, V> {
     private root: BNode<K, V>;
     constructor() {
         super();

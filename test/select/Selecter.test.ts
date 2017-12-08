@@ -1,4 +1,4 @@
-import { Sequential, Binary } from "src/select";
+import { Sequential, Binary, BST } from "src/select";
 import { expect } from "chai";
 import { Indexable } from "src/interface";
 import { DisorderedTableSelecter, OrderedTableSelecter } from "src/select/Selecter";
@@ -58,13 +58,23 @@ describe("select", () => {
             expect(select.select(1), "select").to.be.equal(orderedResult[1]);
             expect(select.ceil("B"), "ceil").to.be.equal("C");
             expect(select.floor("B"), "floor").to.be.equal("A");
+            expect(select.rank("H"), "rank").to.be.equal(3);
 
-            expect(select.contains("A"), "brfore delete call contains").to.be.true;
-            select.delete("A");
-            expect(select.contains("A"), "after delete call contains").to.be.false;
+            select.deleteMax();
+            expect(select.max(), "deleteMax").to.be.equal(orderedResult[orderedResult.length - 2]);
+
+            select.deleteMin();
+            expect(select.min(), "deleteMin").to.be.equal(orderedResult[1]);
+
+            expect(select.contains("M"), "brfore delete call contains").to.be.true;
+            select.delete("M");
+            expect(select.contains("M"), "after delete call contains").to.be.false;
         }
         it("Binary", () => {
             OrderedTest(new Binary());
+        });
+        it("BST", () => {
+            OrderedTest(new BST());
         });
     });
 });
