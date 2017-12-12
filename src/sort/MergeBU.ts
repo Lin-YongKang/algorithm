@@ -11,7 +11,9 @@ export default class MergeBU extends Sorter {
     public static sortSelf(list: Comparables): void {
         let len = list.length;
         this.aux = [];
+        // sz 是子数组的大小
         for (let sz = 1; sz < len; sz = sz + sz) {
+            // lo子数组的索引
             for (let lo = 0; lo < len - sz; lo += sz + sz) {
                 this.merge(list, lo, lo + sz - 1, Math.min(lo + sz + sz - 1, len - 1));
             }
