@@ -6,4 +6,6 @@
 // require("./utils/Counter.test");
 // require("./sort/Sort.test");
 
-require("./select/Selecter.test");
+// require("./select/Selecter.test");
+require("./graph/structure/Graph.test");
+require("./graph/structure/Digraph.test");

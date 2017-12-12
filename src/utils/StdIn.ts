@@ -86,6 +86,11 @@ export default class StdIn {
         this.lines = [];
         return s;
     }
+    public readAllLine() {
+        let lines = this.lines;
+        this.lines = [];
+        return lines;
+    }
     public isEmpty() {
         return this.lines.length === 0;
     }

@@ -1,4 +1,4 @@
-import { Bag, Stack, Queue, MaxPQ, IndexMaxPQ } from "src/utils/BasicSet";
+import { Bag, Stack, Queue, MaxPQ, IndexMaxPQ, AdjacencyList } from "src/utils/BasicSet";
 import { expect } from "chai";
 
 describe("BasicSet 基本数据结构", () => {
@@ -100,5 +100,31 @@ describe("BasicSet 基本数据结构", () => {
         indexMaxPQ.insert(10, { num: 10 });
         indexMaxPQ.change(10, { num: 11 });
         expect(indexMaxPQ.max()).to.deep.equal({ num: 11 });
+    });
+
+    it("AdjacencyList", () => {
+        const list = [0, 4, 5, 6, 7, 8, 9, 1, 2, 3];
+        const adjList = new AdjacencyList<number>(list.length);
+
+        expect(adjList.length).to.be.equal(list.length);
+        expect(adjList.isEmpty()).to.be.true;
+        expect(adjList.size()).to.be.equal(0);
+        list.forEach((v, i) => adjList.add(i, v));
+        expect(adjList.isEmpty()).to.be.false;
+        expect(adjList.size()).to.be.equal(list.length);
+
+        for (let i = 0, len = list.length; i < len; i++) {
+            expect(adjList.size(i)).to.be.equal(1);
+            let adj = adjList.adj(i);
+            expect(adj.size()).to.be.equal(1);
+            for (let item of adj) {
+                expect(item).to.be.equal(list[i]);
+            }
+        }
+
+        let i = 0;
+        for (let item of adjList) {
+            expect(item).to.be.equal(list[i++]);
+        }
     });
 });

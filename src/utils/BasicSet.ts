@@ -214,3 +214,51 @@ export class Queue<Item> implements Iterable<Item> {
         };
     }
 }
+
+export class AdjacencyList<Item> implements Iterable<Item> {
+    private list: Bag<Item>[];
+    private N: number = 0;
+    public length: number = 0;
+    constructor(len: number) {
+        this.list = Array.from({ length: len }, () => new Bag<Item>());
+        this.length = len;
+    }
+    public add(n: number, item: Item): void {
+        this.N++;
+        this.list[n].add(item);
+    }
+    public adj(n: number): Bag<Item> {
+        return this.list[n];
+    }
+    /**
+     * 返回邻接表存储的所有元素数量
+     */
+    public size(): number;
+    /**
+     *
+     * @param n 返回索引n中的元素数量
+     */
+    public size(n: number): number;
+    public size(n?: number) {
+        return n === undefined ? this.N : this.list[n].size();
+    }
+    public isEmpty(): boolean {
+        return this.size() === 0;
+    }
+    [Symbol.iterator]() {
+        let items: Item[] = [];
+        this.list.forEach(bag => {
+            for (let item of bag) {
+                items.push(item);
+            }
+        });
+        let n = 0,
+            len = items.length;
+        return {
+            next() {
+                if (n < len) return { done: false, value: items[n++] };
+                return { done: true, value: undefined };
+            }
+        };
+    }
+}
