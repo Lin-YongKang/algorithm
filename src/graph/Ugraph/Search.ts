@@ -1,14 +1,14 @@
-import Graph from "src/graph/structure/Graph";
+import Ugraph from "src/graph/structure/Ugraph";
 import Search from "src/graph/Interface/Search";
 import { Queue } from "src/utils/BasicSet";
 
 // 深度搜索优先
 export class DepthFirst extends Search {
-    constructor(graph: Graph, s: number) {
+    constructor(graph: Ugraph, s: number) {
         super(graph, s);
         this.dfs(graph, s);
     }
-    private dfs(G: Graph, v: number): void {
+    private dfs(G: Ugraph, v: number): void {
         // 当访问一个定点是
         //将它标记为已访问；
         this._marked[v] = true;
@@ -20,11 +20,11 @@ export class DepthFirst extends Search {
 
 // 广度搜索优先
 export class BreadthFirst extends Search {
-    constructor(graph: Graph, s: number) {
+    constructor(graph: Ugraph, s: number) {
         super(graph, s);
         this.bfs(graph, s);
     }
-    private bfs(graph: Graph, v: number): void {
+    private bfs(graph: Ugraph, v: number): void {
         // 当访问一个定点是
         //将它标记为已访问；
         let queue = new Queue<typeof v>();

@@ -9,3 +9,5 @@
 // require("./select/Selecter.test");
 require("./graph/structure/Ugraph.test");
 require("./graph/structure/Digraph.test");
+require("./graph/Ugraph/index.test");
+require("./graph/Digraph/index.test");
