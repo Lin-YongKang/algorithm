@@ -1,7 +1,7 @@
 import { AdjacencyList } from "src/utils/BasicSet";
 import PGraph from "./PGraph";
 import StdIn from "src/utils/StdIn";
-export default class Graph<Item = number> extends PGraph<Item> {
+export default class Ugraph<Item = number> extends PGraph<Item> {
     private adjList: AdjacencyList<Item>;
     constructor(v: number | StdIn) {
         super();

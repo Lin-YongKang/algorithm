@@ -1,11 +1,11 @@
-import Graph from "src/graph/structure/Graph";
+import Ugraph from "src/graph/structure/Ugraph";
 import { expect } from "chai";
 import StdIn from "src/utils/StdIn";
 import * as fs from "fs";
-describe("Graph structure", () => {
-    it("Graph instantiation by int", () => {
+describe("Ugraph structure", () => {
+    it("Ugraph instantiation by int", () => {
         const V = 10;
-        let graph = new Graph(V);
+        let graph = new Ugraph(V);
         expect(graph.V()).to.be.equal(V);
         expect(graph.E()).to.be.equal(0);
         expect(graph.adj(1).size()).to.be.equal(0);
@@ -15,10 +15,10 @@ describe("Graph structure", () => {
         expect(graph.adj(1).size()).to.be.equal(1);
         expect(graph.adj(2).size()).to.be.equal(1);
     });
-    it("Graph instantiation by Stdin", async () => {
+    it("Ugraph instantiation by Stdin", async () => {
         const result = [[6, 2, 1, 5], [0], [0], [5, 4], [5, 6, 3], [3, 4, 0], [0, 4], [8], [7], [11, 10, 12], [9], [9, 12], [11, 9]];
         let stdIn = await new StdIn(fs.createReadStream("test/data/tinyG.txt")).complete();
-        let graph = new Graph(stdIn);
+        let graph = new Ugraph(stdIn);
         expect(graph.V()).to.be.equal(13);
         expect(graph.E()).to.be.equal(13);
         for (let i = 0; i < 13; i++) {
