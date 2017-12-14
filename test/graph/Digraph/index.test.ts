@@ -6,7 +6,7 @@ import * as fs from "fs";
 import { DepthFirst } from "src/graph/Digraph/Search";
 import { Paths, ShortestPaths } from "src/graph/Digraph/Paths";
 import { Cycle } from "src/graph/Digraph/Cycle";
-
+import { Topological } from "src/graph/Digraph/Topological";
 describe("Digraph", () => {
     let graph: Digraph<number>;
     beforeEach(async () => {
@@ -54,6 +54,16 @@ describe("Digraph", () => {
 
             ugraph.addEdge(2, 0);
             expect(new Cycle(ugraph).hasCycle(), "hasCycle").to.be.true;
+        });
+    });
+
+    describe("Topological", () => {
+        it("Topological", () => {
+            let order = [];
+            for (let node of new Topological(graph).order()) {
+                order.push(node);
+            }
+            expect(order).to.have.ordered.members([9, 10, 11, 12, 7, 8, 0, 5, 1, 2, 6, 4, 3]);
         });
     });
 });
