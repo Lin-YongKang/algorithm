@@ -7,6 +7,8 @@ import { DepthFirst } from "src/graph/Digraph/Search";
 import { Paths, ShortestPaths } from "src/graph/Digraph/Paths";
 import { Cycle } from "src/graph/Digraph/Cycle";
 import { Topological } from "src/graph/Digraph/Topological";
+import { KosarajuSCC } from "src/graph/Digraph/CC";
+
 describe("Digraph", () => {
     let graph: Digraph<number>;
     beforeEach(async () => {
@@ -47,13 +49,13 @@ describe("Digraph", () => {
             expect(new Cycle(graph).hasCycle(), "hasCycle").to.be.false;
         });
         it("Cycle", () => {
-            let ugraph = new Digraph(3);
-            ugraph.addEdge(0, 1);
-            ugraph.addEdge(1, 2);
-            expect(new Cycle(ugraph).hasCycle(), "hasCycle").to.be.false;
+            let graph = new Digraph(3);
+            graph.addEdge(0, 1);
+            graph.addEdge(1, 2);
+            expect(new Cycle(graph).hasCycle(), "hasCycle").to.be.false;
 
-            ugraph.addEdge(2, 0);
-            expect(new Cycle(ugraph).hasCycle(), "hasCycle").to.be.true;
+            graph.addEdge(2, 0);
+            expect(new Cycle(graph).hasCycle(), "hasCycle").to.be.true;
         });
     });
 
@@ -64,6 +66,19 @@ describe("Digraph", () => {
                 order.push(node);
             }
             expect(order).to.have.ordered.members([9, 10, 11, 12, 7, 8, 0, 5, 1, 2, 6, 4, 3]);
+        });
+    });
+
+    describe("KosarajuSCC", () => {
+        it("KosarajuSCC", () => {
+            graph.addEdge(3, 0);
+
+            let cc = new KosarajuSCC(graph);
+            expect(cc.count(), "count").to.be.equal(9);
+            expect(cc.stronglyConnected(0, 6), "stronglyConnected").to.be.true;
+            expect(cc.stronglyConnected(0, 12), "stronglyConnected").to.be.false;
+            expect(cc.id(0), "id").to.be.not.equal(cc.id(12));
+            expect(cc.id(0), "id").to.be.equal(cc.id(6));
         });
     });
 });
