@@ -1,37 +1,6 @@
-import { Stack } from "../interface/BasicSet";
-import { Graph } from "./Graph";
+import { Stack } from "src/utils/BasicSet";
+import Digraph from "src/graph/structure/Digraph";
 export class Cycle {
-    private marked: boolean[];
-    private _hadCycle: boolean;
-    constructor(graph: Graph) {
-        let VLen = graph.V();
-        this.marked = new Array(VLen);
-        this._hadCycle = false;
-        for (let s = 0; s < VLen; s++) {
-            if (!this.marked[s]) {
-                this.dfs(graph, s, s);
-            }
-        }
-    }
-    private dfs(graph: Graph, v: number, u: number): void {
-        this.marked[v] = true;
-        for (let w of graph.adj(v)) {
-            if (!this.marked[w]) {
-                this.dfs(graph, w, v);
-            } else if (w != u) this._hadCycle = true;
-        }
-    }
-    public hasCycle(): boolean {
-        return this._hadCycle;
-    }
-    public static test(graph: Graph) {
-        let cycle = new this(graph);
-        console.log(cycle.hasCycle());
-    }
-}
-
-// 有向环的检测
-export class DirectedCycle {
     private marked: boolean[];
     private edgeTo: number[];
     private _cycle: Stack<number>; // 用于记录有向环中的所有顶点
@@ -45,7 +14,7 @@ export class DirectedCycle {
      */
     private onStack: boolean[];
 
-    constructor(graph: Graph) {
+    constructor(graph: Digraph) {
         let VLen = graph.V();
         // 初始化
         this.edgeTo = new Array(VLen);
@@ -59,7 +28,7 @@ export class DirectedCycle {
             }
         }
     }
-    private dfs(graph: Graph, v: number): void {
+    private dfs(graph: Digraph, v: number): void {
         // 打标记
         this.onStack[v] = true;
         this.marked[v] = true;
@@ -91,9 +60,5 @@ export class DirectedCycle {
     }
     public cycle(): Iterable<number> {
         return this._cycle;
-    }
-    public static test(graph: Graph) {
-        let cycle = new this(graph);
-        console.log(cycle.hasCycle());
     }
 }

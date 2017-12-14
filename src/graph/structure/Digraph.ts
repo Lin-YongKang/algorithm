@@ -27,4 +27,13 @@ export default class Digraph<Item = number> extends PGraph<Item> {
     public adj(v: number) {
         return this.adjList.adj(v);
     }
+    public reverse(): Digraph {
+        let r = new Digraph(this.V());
+        for (let v = 0, len = this.V(); v < len; v++) {
+            for (let w of this.adj(v)) {
+                r.addEdge(<any>w, v);
+            }
+        }
+        return r;
+    }
 }

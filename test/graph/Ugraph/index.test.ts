@@ -5,6 +5,9 @@ import * as fs from "fs";
 
 import { DepthFirst, BreadthFirst } from "src/graph/Ugraph/Search";
 import { Paths, ShortestPaths } from "src/graph/Ugraph/Paths";
+import { CC } from "src/graph/Ugraph/CC";
+import { Cycle } from "src/graph/Ugraph/Cycle";
+import { TwoColor } from "src/graph/Ugraph/TwoColor";
 
 describe("Ugraph", () => {
     let graph: Ugraph<number>;
@@ -45,6 +48,51 @@ describe("Ugraph", () => {
             let p = [];
             for (let item of paths.pathTo(5)) p.push(item);
             expect(p).to.have.ordered.members([0, 5]);
+        });
+    });
+    describe("CC", () => {
+        it("CC", () => {
+            let cc = new CC(graph);
+            expect(cc.count(), "count").to.be.equal(3);
+            expect(cc.connected(0, 4)).to.be.true;
+            expect(cc.connected(0, 12)).to.be.false;
+            expect(cc.id(0))
+                .to.be.equal(cc.id(1))
+                .to.be.equal(0);
+            expect(cc.id(7))
+                .to.be.equal(cc.id(8))
+                .to.be.equal(1);
+            expect(cc.id(0)).to.be.not.equal(cc.id(9));
+        });
+    });
+
+    describe("Cycle", () => {
+        it("Cycle", () => {
+            expect(new Cycle(graph).hasCycle(), "hasCycle").to.be.true;
+        });
+        it("Cycle", () => {
+            let ugraph = new Ugraph(3);
+            ugraph.addEdge(0, 1);
+            ugraph.addEdge(1, 2);
+            expect(new Cycle(ugraph).hasCycle(), "hasCycle").to.be.false;
+
+            ugraph.addEdge(2, 1);
+            expect(new Cycle(ugraph).hasCycle(), "hasCycle").to.be.true;
+        });
+    });
+    describe("TwoColor", () => {
+        it("TwoColor", () => {
+            expect(new TwoColor(graph).isTwoColor(), "isTwoColor").to.be.false;
+        });
+        it("TwoColor", () => {
+            let ugraph = new Ugraph(4);
+            ugraph.addEdge(0, 1);
+            ugraph.addEdge(1, 2);
+            ugraph.addEdge(2, 3);
+            expect(new TwoColor(ugraph).isTwoColor(), "isTwoColor").to.be.true;
+
+            ugraph.addEdge(1, 3);
+            expect(new TwoColor(ugraph).isTwoColor(), "isTwoColor").to.be.false;
         });
     });
 });

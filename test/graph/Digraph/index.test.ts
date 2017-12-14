@@ -4,7 +4,9 @@ import StdIn from "src/utils/StdIn";
 import * as fs from "fs";
 
 import { DepthFirst } from "src/graph/Digraph/Search";
-import { Paths, ShortestPaths } from "src/graph/Ugraph/Paths";
+import { Paths, ShortestPaths } from "src/graph/Digraph/Paths";
+import { Cycle } from "src/graph/Digraph/Cycle";
+
 describe("Digraph", () => {
     let graph: Digraph<number>;
     beforeEach(async () => {
@@ -37,6 +39,21 @@ describe("Digraph", () => {
             let p = [];
             for (let item of paths.pathTo(5)) p.push(item);
             expect(p).to.have.ordered.members([0, 5]);
+        });
+    });
+
+    describe("Cycle", () => {
+        it("Cycle", () => {
+            expect(new Cycle(graph).hasCycle(), "hasCycle").to.be.false;
+        });
+        it("Cycle", () => {
+            let ugraph = new Digraph(3);
+            ugraph.addEdge(0, 1);
+            ugraph.addEdge(1, 2);
+            expect(new Cycle(ugraph).hasCycle(), "hasCycle").to.be.false;
+
+            ugraph.addEdge(2, 0);
+            expect(new Cycle(ugraph).hasCycle(), "hasCycle").to.be.true;
         });
     });
 });
