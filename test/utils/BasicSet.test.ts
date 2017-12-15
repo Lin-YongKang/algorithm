@@ -1,4 +1,4 @@
-import { Bag, Stack, Queue, MaxPQ, IndexMaxPQ, AdjacencyList } from "src/utils/BasicSet";
+import { Bag, Stack, Queue, MaxPQ, MinPQ, IndexMaxPQ, AdjacencyList } from "src/utils/BasicSet";
 import { expect } from "chai";
 
 describe("BasicSet 基本数据结构", () => {
@@ -77,7 +77,23 @@ describe("BasicSet 基本数据结构", () => {
         expect(maxPQ.isEmpty()).to.be.true;
         expect(maxPQ.size()).to.be.equal(0);
     });
+    it("MinPQ", () => {
+        const minPQ = new MinPQ<number>();
+        const list = [0, 4, 5, 6, 7, 8, 9, 1, 2, 3];
 
+        expect(minPQ.isEmpty()).to.be.true;
+        expect(minPQ.size()).to.be.equal(0);
+        list.forEach(v => minPQ.insert(v));
+        expect(minPQ.isEmpty()).to.be.false;
+        expect(minPQ.size()).to.be.equal(list.length);
+
+        for (let i = 0, len = list.length; i < len; i++) {
+            expect(minPQ.min()).to.be.equal(i);
+            expect(minPQ.delMin()).to.be.equal(i);
+        }
+        expect(minPQ.isEmpty()).to.be.true;
+        expect(minPQ.size()).to.be.equal(0);
+    });
     it("IndexMaxPQ", () => {
         const indexMaxPQ = new IndexMaxPQ<{ num: number }>();
         const list = [0, 4, 5, 6, 7, 8, 9, 1, 2, 3];
