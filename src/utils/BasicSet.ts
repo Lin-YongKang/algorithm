@@ -132,6 +132,43 @@ export class IndexMaxPQ<Item> extends Comparer {
     }
 }
 
+export class IndexMinPQ<Item> extends Comparer {
+    private minPQ: MinPQ<number>;
+    private list: Item[];
+    constructor() {
+        super();
+        this.list = new Array();
+        this.minPQ = new MinPQ();
+    }
+    public insert(k: number, item: Item): void {
+        this.list[k] = item;
+        this.minPQ.insert(k);
+    }
+    public change(k: number, item: Item): void {
+        this.list[k] = item;
+    }
+    public contains(k: number): boolean {
+        return this.list[k] !== undefined;
+    }
+    public min(): Item {
+        return this.list[this.maxIndex()];
+    }
+    public maxIndex(): number {
+        return this.minPQ.min();
+    }
+    public delMin(): Item {
+        let max = this.min();
+        this.list[this.minPQ.delMin()] = undefined;
+        return max;
+    }
+    public isEmpty(): boolean {
+        return this.minPQ.isEmpty();
+    }
+    public size(): number {
+        return this.minPQ.size();
+    }
+}
+
 class Node<T> {
     public item: T;
     public next: Node<T>;
